@@ -1,6 +1,6 @@
-import type { NextFunction, Request, RequestHandler, Response } from 'express'
+import type { RequestHandler } from 'express'
 
-export const middleware: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
-  res.send('Middleware executed')
+export const middleware: RequestHandler = (req, res, next) => {
+  req.customProperty = new Date().toISOString()
   next()
 }
