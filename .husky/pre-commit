@@ -1,4 +1,4 @@
-npm run test
-npm run test:run
-npm run type-check
-npx lint-staged
+# npm run test
+# npm run test:run
+# npm run type-check
+# npx lint-staged

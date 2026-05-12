@@ -1,10 +1,10 @@
 import express from 'express'
+// import { logger } from '#middlewares/logger.js'
+import morgan from 'morgan'
 
+import ErrorHandler from '#middlewares/error.js'
 import { middleware } from '#middlewares/middleware.js'
 import healthRoute from '#routes/health.route.js'
-import { logger } from '#middlewares/logger.js'
-import morgan from 'morgan'
-import ErrorHandler from '#middlewares/error.js'
 const app = express()
 
 const port = process.env.PORT ?? '3000'
