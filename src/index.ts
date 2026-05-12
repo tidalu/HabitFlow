@@ -1,10 +1,11 @@
 import express from 'express'
-// import { logger } from '#middlewares/logger.js'
-import morgan from 'morgan'
 
-import ErrorHandler from '#middlewares/error.js'
 import { middleware } from '#middlewares/middleware.js'
+import morgan from 'morgan'
+// import { logger } from '#middlewares/logger.js'
 import healthRoute from '#routes/health.route.js'
+import ErrorHandler from '#middlewares/error.js'
+import { notFoundHandler } from '#middlewares/404.js'
 const app = express()
 
 const port = process.env.PORT ?? '3000'
@@ -17,6 +18,8 @@ app.use(healthRoute)
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+app.use(notFoundHandler)
 
 const server = app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
