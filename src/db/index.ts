@@ -1,3 +1,6 @@
-import { pool } from '#db/pool.js'
+import { prisma } from '#lib/prisma.js'
 
-export const query = (text: string, params?: any[]) => pool.query(text, params)
+// user create
+export const createUser = async (data: { name: string; email: string; password: string }) => {
+  return prisma.user.create({ data })
+}

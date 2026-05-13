@@ -2,8 +2,8 @@ import express from 'express'
 
 import { middleware } from '#middlewares/middleware.js'
 import morgan from 'morgan'
-// import { logger } from '#middlewares/logger.js'
 import healthRoute from '#routes/health.route.js'
+import authRoute from '#routes/auth.route.js'
 import ErrorHandler from '#middlewares/error.js'
 import { notFoundHandler } from '#middlewares/404.js'
 const app = express()
@@ -11,14 +11,15 @@ const app = express()
 const port = process.env.PORT ?? '3000'
 
 app.use(middleware)
-// app.use(logger)
 app.use(morgan('combined'))
 app.use(healthRoute)
+app.use('/auth', authRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+// 404 handler
 app.use(notFoundHandler)
 
 const server = app.listen(port, () => {
