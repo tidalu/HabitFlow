@@ -19,13 +19,21 @@ model User {
   password  String
   createdAt DateTime @default(now())
   habits    Habits[]
+  sessions  Sessions[]
+}
+
+model Sessions {
+  session_id Int @id @default(autoincrement())
+  expires    DateTime
+  User       User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
 }
 
 model Habits {
   id        Int          @id @default(autoincrement())
   name      String
   createdAt DateTime     @default(now())
-  Author    User         @relation(fields: [userId], references: [id])
+  Author    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   logs      Habit_logs[]
 }
@@ -33,6 +41,6 @@ model Habits {
 model Habit_logs {
   id       Int      @id @default(autoincrement())
   log_date DateTime @default(now())
-  Habit    Habits   @relation(fields: [habitId], references: [id])
+  Habit    Habits   @relation(fields: [habitId], references: [id], onDelete: Cascade)
   habitId  Int
 }
