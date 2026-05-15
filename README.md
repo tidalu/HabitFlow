@@ -1,3 +1,3 @@
-# express-template
+# HabitFlow
 
-this is the production reliable express project structure
+Personal Habit Tracker API
