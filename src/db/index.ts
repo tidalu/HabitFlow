@@ -18,6 +18,7 @@ export const sessionDelete = async (sessionId: number) => {
   return prisma.sessions.delete({ where: { session_id: sessionId } })
 }
 
+// habits
 export const getHabitsForUser = async (userId: string) => {
   return prisma.habits.findMany({ where: { userId } })
 }
@@ -32,4 +33,23 @@ export const updateHabitForUser = async (id: number, userId: string, name: strin
 
 export const deleteHabitForUser = async (id: number, userId: string) => {
   return prisma.habits.delete({ where: { id, userId } })
+}
+
+// habit logs
+
+export const createLogForHabit = async (habitId: number) => {
+  return prisma.habit_logs.create({ data: { habitId } })
+}
+
+export const getLogsForHabit = async (habitId: number) => {
+  return prisma.habit_logs.findMany({ where: { habitId } })
+}
+
+export const getLastLogForHabit = async (habitId: number) => {
+  return prisma.habit_logs.findFirst({
+    where: { habitId },
+    orderBy: {
+      log_date: 'desc',
+    },
+  })
 }
