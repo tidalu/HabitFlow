@@ -8,6 +8,7 @@ import healthRoute from '#routes/health.route.js'
 import authRoute from '#routes/auth.route.js'
 import habitsRoute from '#routes/habits.route.js'
 import logsRoute from '#routes/logs.route.js'
+import analyticsRoute from '#routes/analytics.route.js'
 import ErrorHandler from '#middlewares/error.js'
 import { notFoundHandler } from '#middlewares/404.js'
 const app = express()
@@ -23,6 +24,7 @@ app.use(healthRoute)
 app.use('/auth', authRoute)
 app.use('/habits', habitsRoute)
 app.use('/habits', logsRoute)
+app.use('/habits', analyticsRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
