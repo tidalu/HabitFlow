@@ -39,7 +39,8 @@
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.20.0",
     "pg-pool": "^3.13.0",
-    "response-time": "^2.3.4"
+    "response-time": "^2.3.4",
+    "zod": "^4.4.3"
   },
   "imports": {
     "#*": "./src/*"
