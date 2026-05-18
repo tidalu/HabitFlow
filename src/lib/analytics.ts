@@ -14,7 +14,6 @@ export const calculateStreak = ({ habit_logs }: { habit_logs: Habit_logs[] }): S
   let firstLog = date(habit_logs[0].log_date)
   let lastLog = date(habit_logs[habit_logs.length - 1].log_date)
   let all = lastLog - firstLog + 1
-  console.log(all, firstLog, lastLog)
   completionRate = (totalCompletions / all) * 100
 
   const today = date(new Date())
@@ -58,8 +57,5 @@ export const calculateStreak = ({ habit_logs }: { habit_logs: Habit_logs[] }): S
 }
 
 function date(date: Date): number {
-  let stringDate = date
-
-  console.log(new Date(date.toISOString().split('T')[0]).getDate())
   return new Date(date.toISOString().split('T')[0]).getDate()
 }
