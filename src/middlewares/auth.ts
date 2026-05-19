@@ -11,14 +11,14 @@ if (!JWT_SECRET) {
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token || null
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    return res.status(401).json({ message: 'Unauthorized, token is not available , first login' })
   } else {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: string }
       req.userId = decoded.userId
       next()
     } catch (err) {
-      return res.status(401).json({ message: 'Unauthorized' })
+      return res.status(401).json({ message: 'Unauthorized', error: err })
     }
   }
 }

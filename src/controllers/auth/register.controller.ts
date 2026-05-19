@@ -1,53 +1,22 @@
 import { createUser } from '#db/index.js'
 import { RequestHandler } from 'express'
 import bcrypt from 'bcrypt'
+import { z } from 'zod'
 
 const SALT_ROUNDS = Number(process.env.BCRYPT_ROUNDS) || 10
-
+const schema = z.object({
+  name: z.string('Name must be a string').min(2).max(50).nonempty(),
+  email: z.email('Invalid email address').nonempty(),
+  password: z.string('Password must be a string').min(8).max(100).nonempty(),
+})
 export const registerHandler: RequestHandler = async (req, res, next) => {
   try {
-    let { name, email, password } = req.body
-
-    // Basic validation
-    if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
-      return res.status(400).json({
-        message: 'Invalid request body',
-      })
-    }
+    let { name, email, password } = schema.parse(req.body)
 
     // Normalization
     name = name.trim()
     email = email.trim().toLowerCase()
     password = password.trim()
-
-    // Empty checks after trimming
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        message: 'Name, email, and password are required',
-      })
-    }
-
-    // Length validation
-    if (name.length < 2 || name.length > 50) {
-      return res.status(400).json({
-        message: 'Name must be between 2 and 50 characters',
-      })
-    }
-
-    if (password.length < 8 || password.length > 100) {
-      return res.status(400).json({
-        message: 'Password must be between 8 and 100 characters',
-      })
-    }
-
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({
-        message: 'Invalid email format',
-      })
-    }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
 

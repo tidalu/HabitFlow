@@ -3,9 +3,10 @@ import getAllHabitsHandler from '#controllers/habits/crud/getAllHabits.controlle
 import createHabitHandler from '#controllers/habits/crud/createHabit.controller.js'
 import updateHabitHandler from '#controllers/habits/crud/updateHabit.controller.js'
 import deleteHabitHandler from '#controllers/habits/crud/deleteHabit.controller.js'
+import { isAuthenticated } from '#middlewares/auth.js'
 const router = express.Router()
 
-router.get('/', getAllHabitsHandler)
+router.get('/', isAuthenticated, getAllHabitsHandler)
 router.post('/', createHabitHandler)
 router.put('/:id', updateHabitHandler)
 router.delete('/:id', deleteHabitHandler)

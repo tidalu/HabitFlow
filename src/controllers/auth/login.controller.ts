@@ -2,6 +2,7 @@ import { RequestHandler } from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { findUserByEmail, storeSession } from '#db/index.js'
+import * as z from 'zod'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'LIFE IS BEAUTIFUL'
 
@@ -9,13 +10,12 @@ if (!JWT_SECRET) {
   throw new Error('JWT_SECRET is not set. Using default secret. This is not recommended for production environments.')
 }
 
+const schema = z.object({ email: z.email(), password: z.string().min(8, 'Password must be at least 8 characters long').max(100) })
+
 export const loginHandler: RequestHandler = async (req, res) => {
-  const { email, password } = req.body
+  const { email, password } = schema.parse(req.body)
   let user
 
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' })
-  }
   try {
     user = await findUserByEmail(email)
     if (!user) {
@@ -24,10 +24,6 @@ export const loginHandler: RequestHandler = async (req, res) => {
   } catch (error) {
     console.log(error)
     return res.status(500).json({ message: 'Internal server error' })
-  }
-
-  if (!user) {
-    return res.status(401).json({ message: 'Invalid email or password' })
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password)

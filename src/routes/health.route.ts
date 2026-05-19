@@ -4,8 +4,7 @@ import { healthCheck } from '#controllers/health.controller.js'
 import { isAuthenticated } from '#middlewares/auth.js'
 
 const router = express.Router()
-router.use(isAuthenticated)
 
-router.get('/health', healthCheck)
+router.get('/health', isAuthenticated, healthCheck)
 
 export default router
