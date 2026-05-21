@@ -1,7 +1,10 @@
 import { prisma } from '#lib/prisma.js'
+// import * as z from 'zod'
 
 // user create
 export const createUser = async (data: { name: string; email: string; password: string }) => {
+  // const dataTyped = z.object({ name: z.string(), email: z.string(), password: z.string() }).parse(data)
+  // console.log(dataTyped, 'dataTyped')
   return prisma.user.create({ data })
 }
 

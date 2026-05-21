@@ -16,8 +16,8 @@ const app = express()
 const port = process.env.PORT ?? '3000'
 
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(middleware)
 app.use(morgan('combined'))
 app.use(healthRoute)
@@ -32,6 +32,8 @@ app.get('/', (req, res) => {
 
 // 404 handler
 app.use(notFoundHandler)
+
+app.use(ErrorHandler)
 
 const server = app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -53,5 +55,4 @@ process.on('uncaughtException', (err) => {
   })
 })
 
-app.use(ErrorHandler)
 export default app

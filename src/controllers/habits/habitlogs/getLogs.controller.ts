@@ -1,17 +1,21 @@
 import { getLogsForHabit } from '#db/index.js'
 import { RequestHandler } from 'express'
+import { z } from 'zod'
 
+const schema = z.object({
+  id: z.coerce.number().min(1, 'ID is required')
+})
 const getLogs: RequestHandler = async (req, res) => {
-  const { id } = req.params
-  if (!id || isNaN(Number(id))) {
-    res.status(400).json({ message: 'Invalid habit ID' })
-    return
-  }
-
   try {
-    const logs = await getLogsForHabit(+id)
+    const { id } = schema.parse(req.params)
+
+    const logs = await getLogsForHabit(id)
     res.status(200).json({ data: logs })
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      res.status(400).json({ message: error.issues[0].message })
+      return
+    }
     res.status(500).json({ message: 'Error fetching logs' })
   }
 }

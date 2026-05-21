@@ -1,18 +1,21 @@
 import { createHabitForUser } from '#db/index.js'
 import { RequestHandler } from 'express'
+import * as z from 'zod'
 
+const schema = z.object({
+  name: z.string().trim().min(1, 'Name is required').max(100, 'Name too long')
+})
 const createHabit: RequestHandler = async (req, res) => {
   try {
-    const { name } = req.body
-    console.log('Creating habit with name:', name, 'for userId:', req.userId)
-    if (!name || typeof name !== 'string' || name.trim() === '') {
-      res.status(400).json({ message: 'Name is required and must be a non-empty string' })
-      return
-    }
+    const { name } = schema.parse(req.body)
 
     const habit = await createHabitForUser(req.userId!, name.trim())
     res.status(201).json({ data: habit, message: 'Habit created successfully' })
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      res.status(400).json({ message: error.issues[0].message })
+      return
+    }
     res.status(500).json({ message: 'Error creating habit' })
   }
 }
