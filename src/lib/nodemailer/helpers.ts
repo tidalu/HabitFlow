@@ -333,11 +333,11 @@ function makeHtmlBody2({
 }
 function mailDataGen(email: string | string[], subject: string, text: string, html: string) {
   return {
-    from: 'jsjsdq23@gmail.com',
-    to: email instanceof Array ? email.join(',') : email,
+    from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
+    html: html,
     subject: subject,
     text: text,
-    html: html
+    to: email instanceof Array ? email.join(',') : email
   }
 }
-export { didLogToday, makeHtmlBody1, makeHtmlBody2, mailDataGen }
+export { didLogToday, mailDataGen, makeHtmlBody1, makeHtmlBody2 }

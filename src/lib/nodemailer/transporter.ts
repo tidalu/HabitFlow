@@ -1,44 +1,55 @@
+import nodemailer from 'nodemailer'
+
 import { userData } from '#db/index.js'
 import { calculateStreak } from '#lib/analytics.js'
-import nodemailer from 'nodemailer'
+
 import { didLogToday, mailDataGen, makeHtmlBody1, makeHtmlBody2 } from './helpers'
 
-console.log(process.env.SMTP_USER)
-console.log(process.env.SMTP_PASS)
+const smtpUser = process.env.SMTP_USER
+const smtpPass = process.env.SMTP_PASS
+
+if (!smtpUser || !smtpPass) {
+  throw new Error('SMTP_USER and SMTP_PASS must be set in .env')
+}
+
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
+    pass: smtpPass,
+    user: smtpUser
+  },
+  host: 'smtp.gmail.com',
+  port: 587,
+  requireTLS: true,
+  secure: false
 })
 
 export async function sendMail() {
   try {
+    await transporter.verify()
+    console.log('Server is ready to take our messages')
+
     const users = await userData()
 
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].habits.length === 0) {
-        transporter.sendMail(
-          mailDataGen(users[i].email, "You're all set — now let's build your first habit", 'hello world', makeHtmlBody1(users[i].name))
+    for (const user of users) {
+      if (user.habits.length === 0) {
+        await transporter.sendMail(
+          mailDataGen(user.email, "You're all set — now let's build your first habit", 'hello world', makeHtmlBody1(user.name))
         )
       } else {
-        if (!didLogToday(users[i].habits[0].logs)) {
-          const { currentStreak } = calculateStreak({ habit_logs: users[i].habits[0].logs })
-          transporter.sendMail(
+        if (!didLogToday(user.habits[0].logs)) {
+          const { currentStreak } = calculateStreak({ habit_logs: user.habits[0].logs })
+          await transporter.sendMail(
             mailDataGen(
-              users[i].email,
+              user.email,
               'Your habits are waiting for you today',
               'hello world',
               makeHtmlBody2({
-                name: users[i].name,
-                habit_count: users[i].habits.length,
-                habits: users[i].habits.slice(0, 3).map((h) => ({ name: h.name })),
-                streak_days: currentStreak,
-                has_more: users[i].habits.length > 3,
-                remaining_count: users[i].habits.length - 3
+                habit_count: user.habits.length,
+                habits: user.habits.slice(0, 3).map((h) => ({ name: h.name })),
+                has_more: user.habits.length > 3,
+                name: user.name,
+                remaining_count: user.habits.length - 3,
+                streak_days: currentStreak
               })
             )
           )
@@ -46,6 +57,6 @@ export async function sendMail() {
       }
     }
   } catch (err) {
-    throw new Error('Error sending email')
+    console.log(err)
   }
 }
