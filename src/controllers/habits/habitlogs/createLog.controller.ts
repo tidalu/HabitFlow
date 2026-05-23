@@ -1,7 +1,7 @@
-import { createLogForHabit, getLastLogForHabit } from '#db/index.js'
+import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '#db/index.js'
 import { RequestHandler } from 'express'
 import * as z from 'zod'
-import { Habit_logs } from '../../../../types/schema'
+import { Habit_logs, type Habits } from '../../../../types/schema'
 
 const schema = z.object({
   id: z.coerce.number().min(1, 'ID is required')
@@ -9,6 +9,7 @@ const schema = z.object({
 const createLog: RequestHandler = async (req, res) => {
   try {
     const { id } = schema.parse(req.params)
+    const habit = (await getHabitForUser(id)) as Habits
 
     const logs = (await getLastLogForHabit(id)) as Habit_logs
     const lastLog = logs?.log_date
@@ -25,7 +26,7 @@ const createLog: RequestHandler = async (req, res) => {
       }
     }
 
-    const log = await createLogForHabit(id)
+    const log = await createLogForHabit(id, habit.userId)
     res.status(201).json({ data: log, message: 'Log created successfully' })
   } catch (error) {
     if (error instanceof z.ZodError) {
