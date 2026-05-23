@@ -1,6 +1,5 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
 
 import { middleware } from '#middlewares/middleware.js'
 import morgan from 'morgan'
@@ -11,10 +10,12 @@ import logsRoute from '#routes/logs.route.js'
 import analyticsRoute from '#routes/analytics.route.js'
 import ErrorHandler from '#middlewares/error.js'
 import { notFoundHandler } from '#middlewares/404.js'
+
 const app = express()
 
 const port = process.env.PORT ?? '3000'
 
+import '#lib/cron.js'
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
