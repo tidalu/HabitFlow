@@ -9,7 +9,7 @@ const deleteHabit: RequestHandler = async (req, res) => {
   try {
     const { id } = schema.parse(req.params)
     await deleteHabitForUser(id, req.userId!)
-    res.json({ message: 'Habit deleted successfully' })
+    res.status(204)
   } catch (error) {
     if (error instanceof z.ZodError) {
       res.status(400).json({ message: error.issues[0].message })

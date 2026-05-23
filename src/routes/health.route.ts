@@ -5,6 +5,6 @@ import { isAuthenticated } from '#middlewares/auth.js'
 
 const router = express.Router()
 
-router.get('/health', isAuthenticated, healthCheck)
+router.get('/health', healthCheck)
 
 export default router

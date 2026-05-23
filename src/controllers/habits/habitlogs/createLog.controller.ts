@@ -33,7 +33,7 @@ const createLog: RequestHandler = async (req, res) => {
       res.status(400).json({ message: error.issues[0].message })
       return
     }
-    res.status(500).json({ message: 'Error creating log' })
+    res.status(500).json({ message: 'Internal error occured while creating log' })
   }
 }
 

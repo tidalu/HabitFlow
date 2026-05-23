@@ -32,15 +32,12 @@ export const loginHandler: RequestHandler = async (req, res) => {
     return res.status(401).json({ message: 'Invalid email or password' })
   }
 
-  // const session = await storeSession({ expires: new Date(Date.now() + 1000 * 60 * 60 * 24), userId: user.id })
-  // res.cookie('session', session.userId, { httpOnly: true, expires: session.expires })
-
   const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1d' })
   res.cookie('token', token, {
     httpOnly: true,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
     sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production'
   })
   res.status(200).json({ message: 'Login Successful' })
 }

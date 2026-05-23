@@ -4,7 +4,8 @@ import getLogsHandler from '#controllers/habits/habitlogs/getLogs.controller.js'
 import { isAuthenticated } from '#middlewares/auth.js'
 const router = express.Router()
 router.use(isAuthenticated)
-router.post('/:id/logs', createLogHandler)
-router.get('/:id/logs', getLogsHandler)
+
+router.post('/:id', createLogHandler)
+router.get('/:id', getLogsHandler)
 
 export default router

@@ -14,7 +14,7 @@ const updateHabit: RequestHandler = async (req, res) => {
     const { name } = schemaName.parse(req.body)
 
     const habit = await updateHabitForUser(id, req.userId!, name)
-    res.json(habit)
+    res.status(200).json({ data: habit })
   } catch (error) {
     if (error instanceof z.ZodError) {
       res.status(400).json({ message: error.issues[0].message })

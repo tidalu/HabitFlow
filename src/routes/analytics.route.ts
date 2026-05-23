@@ -3,6 +3,6 @@ import getStatsHandler from '#controllers/habits/analytics/getStats.controller.j
 
 const router = express.Router()
 
-router.get('/:id/stats', getStatsHandler)
+router.get('/:id', getStatsHandler)
 
 export default router

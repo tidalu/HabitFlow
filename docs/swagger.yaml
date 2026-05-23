@@ -1,0 +1,517 @@
+openapi: 3.0.0
+info:
+  title: HabitFlow API
+  version: 1.0.0
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /analytics/{id}:
+    get:
+      summary: get analytics
+      tags:
+        - Analytics
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: habit id
+      responses:
+        '200':
+          description: Analytics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currentStreak:
+                    type: integer
+                    example: 2
+                  longestStreak:
+                    type: integer
+                    example: 10
+                  completionRate:
+                    type: integer
+                    example: 70
+                  totalCompletions:
+                    type: integer
+                    example: 23
+        '400':
+          description: client error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: HabitId required
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Server failed
+  /auth/register:
+    post:
+      summary: User registration
+      security: []
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: Steve Jobs
+                email:
+                  type: string
+                  example: stevejobs@apple.com
+                password:
+                  type: string
+                  example: strongPassword123
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 035d50b8-628c-445f-a89c-aadbb1f437ac
+                  name:
+                    type: string
+                    example: Steve Jobs
+                  email:
+                    type: string
+                    example: stevejobs@apple.com
+        '401':
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: You are already logged in
+        '409':
+          description: Duplicate emails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email already exist
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Failed to create an user
+  /auth/login:
+    post:
+      summary: Login to the system
+      security: []
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: stevejobs@apple.com
+                password:
+                  type: string
+                  example: strongPassword123
+      responses:
+        '200':
+          description: Success
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: token=eyJhbGci...; HttpOnly; Path=/
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login Successfull
+        '401':
+          description: Invalid User
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid email or password
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Failed to authenticate you , pal
+  /logs/{id}:
+    get:
+      summary: Get all logs for a habit
+      tags:
+        - Logs
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Habit ID
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    example: {}
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Expected string, received number
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error fetching logs
+    post:
+      summary: Create a log for a habit
+      tags:
+        - Logs
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Habit ID
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: Log created successfully
+        '400':
+          description: Creating error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Log for today already exists
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal error occured while creating log
+
+  /health:
+    get:
+      summary: Get backend status
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: 2026-05-23T20:49:18.211Z
+  /habits:
+    get:
+      summary: Get all habits
+      tags:
+        - Habits
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Joggin
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: 2026-05-16T23:49:03.369Z
+                        userId:
+                          type: string
+                          example: 1e08e022-1470-4edd-91f0-fdbe94a3c9a8
+        '500':
+          description: internal error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error fetching habits
+                  error:
+                    type: object
+    post:
+      summary: Create a new Habit
+      tags:
+        - Habits
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Jogging
+      responses:
+        '201':
+          description: Created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      name:
+                        type: string
+                        example: jogging
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: 2026-05-16T23:49:03.369Z
+                      userId:
+                        type: string
+                        example: 1e08e022-1470-4edd-91f0-fdbe94a3c9a8
+                  message:
+                    type: string
+                    example: Habit created successfully
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Name is required
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error while creating a habit
+  /habits/{id}:
+    put:
+      summary: Update habit
+      tags:
+        - Habits
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Habit ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Running
+      responses:
+        '200':
+          description: Updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      name:
+                        type: string
+                        example: jogging
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: 2026-05-16T23:49:03.369Z
+                      userId:
+                        type: string
+                        example: 1e08e022-1470-4edd-91f0-fdbe94a3c9a8
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Name is required
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error while updating the habit
+    delete:
+      summary: Delete habit
+      tags:
+        - Habits
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Habit id
+      responses:
+        '204':
+          description: Deleted successfully
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Name is required
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error while updating the habit
