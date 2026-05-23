@@ -1,5 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import swaggerUi from 'swagger-ui-express'
+import Yaml from 'yamljs'
 
 import { middleware } from '#middlewares/middleware.js'
 import morgan from 'morgan'
@@ -10,12 +12,21 @@ import logsRoute from '#routes/logs.route.js'
 import analyticsRoute from '#routes/analytics.route.js'
 import ErrorHandler from '#middlewares/error.js'
 import { notFoundHandler } from '#middlewares/404.js'
+import '#lib/cron.js'
+import path from 'node:path'
+import { fileURLToPath } from 'url'
 
-const app = express()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const port = process.env.PORT ?? '3000'
 
-import '#lib/cron.js'
+const app = express()
+
+const swaggerSpec = Yaml.load('docs/swagger.yaml')
+
+app.use(express.static('public'))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -24,12 +35,8 @@ app.use(morgan('combined'))
 app.use(healthRoute)
 app.use('/auth', authRoute)
 app.use('/habits', habitsRoute)
-app.use('/habits', logsRoute)
-app.use('/habits', analyticsRoute)
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/logs', logsRoute)
+app.use('/analytics', analyticsRoute)
 
 // 404 handler
 app.use(notFoundHandler)
