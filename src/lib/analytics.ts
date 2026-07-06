@@ -1,32 +1,38 @@
-import { Habit_logs, StreakData } from '../../types/schema'
+import type { StreakData } from '../../types/schema'
 
-export const calculateStreak = ({ habit_logs }: { habit_logs: Habit_logs[] }): StreakData => {
-  let currentStreak = 1
-  let longestStreak = 0
-  let totalCompletions = habit_logs.length
-  let completionRate = 0
-  let streak = 1
+interface HabitLogData {
+  log_date: Date | string
+}
 
-  if (habit_logs.length === 0) {
-    return { currentStreak: 0, longestStreak, totalCompletions, completionRate }
+const DAY_IN_MS = 24 * 60 * 60 * 1000
+
+export const calculateStreak = ({ habit_logs }: { habit_logs: HabitLogData[] }): StreakData => {
+  const completedDays = [...new Set(habit_logs.map((log) => toUtcDay(log.log_date)))].sort((a, b) => a - b)
+  const totalCompletions = habit_logs.length
+
+  if (completedDays.length === 0) {
+    return {
+      completionRate: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+      totalCompletions
+    }
   }
 
-  let firstLog = date(habit_logs[0].log_date)
-  let lastLog = date(habit_logs[habit_logs.length - 1].log_date)
-  let all = lastLog - firstLog + 1
-  completionRate = (totalCompletions / all) * 100
+  const firstLog = completedDays[0]
+  const lastLog = completedDays[completedDays.length - 1]
+  const loggedDayCount = lastLog - firstLog + 1
+  const completionRate = (completedDays.length / loggedDayCount) * 100
 
-  const today = date(new Date())
-  const lastLogDate = date(habit_logs[habit_logs.length - 1].log_date)
-  const diff = today - lastLogDate
+  const today = toUtcDay(new Date())
+  const diff = today - lastLog
 
+  let currentStreak = 1
   if (diff > 1) {
     currentStreak = 0
   } else {
-    for (let i = habit_logs.length - 1; i > 0; i--) {
-      const curr = date(habit_logs[i].log_date)
-      const prev = date(habit_logs[i - 1].log_date)
-      if (curr - prev === 1) {
+    for (let i = completedDays.length - 1; i > 0; i--) {
+      if (completedDays[i] - completedDays[i - 1] === 1) {
         currentStreak++
       } else {
         break
@@ -34,11 +40,11 @@ export const calculateStreak = ({ habit_logs }: { habit_logs: Habit_logs[] }): S
     }
   }
 
-  for (let i = 1; i < habit_logs.length; i++) {
-    const currentLogDate = date(habit_logs[i].log_date)
-    const previousLogDate = date(habit_logs[i - 1].log_date)
+  let longestStreak = 1
+  let streak = 1
 
-    if (currentLogDate - previousLogDate === 1) {
+  for (let i = 1; i < completedDays.length; i++) {
+    if (completedDays[i] - completedDays[i - 1] === 1) {
       streak++
       if (streak > longestStreak) {
         longestStreak = streak
@@ -49,13 +55,15 @@ export const calculateStreak = ({ habit_logs }: { habit_logs: Habit_logs[] }): S
   }
 
   return {
+    completionRate,
     currentStreak,
     longestStreak,
-    totalCompletions,
-    completionRate,
+    totalCompletions
   }
 }
 
-function date(date: Date): number {
-  return new Date(date.toISOString().split('T')[0]).getDate()
+function toUtcDay(date: Date | string): number {
+  const parsedDate = date instanceof Date ? date : new Date(date)
+
+  return Math.floor(Date.UTC(parsedDate.getUTCFullYear(), parsedDate.getUTCMonth(), parsedDate.getUTCDate()) / DAY_IN_MS)
 }

@@ -1,7 +1,9 @@
-import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '#db/index.js'
 import { RequestHandler } from 'express'
 import * as z from 'zod'
-import { Habit_logs, type Habits } from '../../../../types/schema'
+
+import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '#db/index.js'
+
+import { Habit_logs } from '../../../../types/schema'
 
 const schema = z.object({
   id: z.coerce.number().min(1, 'ID is required')
@@ -9,24 +11,26 @@ const schema = z.object({
 const createLog: RequestHandler = async (req, res) => {
   try {
     const { id } = schema.parse(req.params)
-    const habit = (await getHabitForUser(id)) as Habits
-
-    const logs = (await getLastLogForHabit(id)) as Habit_logs
-    const lastLog = logs?.log_date
-
-    if (lastLog) {
-      const sameDay =
-        lastLog?.getDate() === new Date().getDate() &&
-        lastLog?.getMonth() === new Date().getMonth() &&
-        lastLog?.getFullYear() === new Date().getFullYear()
-
-      if (sameDay) {
-        res.status(400).json({ message: 'Log for today already exists' })
-        return
-      }
+    const habit = await getHabitForUser(id, req.userId)
+    if (!habit) {
+      res.status(404).json({ message: 'Habit not found' })
+      return
     }
 
-    const log = await createLogForHabit(id, habit.userId)
+    const logs = (await getLastLogForHabit(id)) as Habit_logs
+
+    const sameDay =
+      logs &&
+      logs.log_date.getDate() === new Date().getDate() &&
+      logs.log_date.getMonth() === new Date().getMonth() &&
+      logs.log_date.getFullYear() === new Date().getFullYear()
+
+    if (sameDay) {
+      res.status(400).json({ message: 'Log for today already exists' })
+      return
+    }
+
+    const log = await createLogForHabit(id, req.userId)
     res.status(201).json({ data: log, message: 'Log created successfully' })
   } catch (error) {
     if (error instanceof z.ZodError) {

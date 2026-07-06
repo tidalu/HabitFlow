@@ -1,10 +1,11 @@
-import { RequestHandler } from 'express'
 import bcrypt from 'bcrypt'
+import { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
-import { findUserByEmail, storeSession } from '#db/index.js'
 import * as z from 'zod'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'LIFE IS BEAUTIFUL'
+import { findUserByEmail } from '#db/index.js'
+
+const JWT_SECRET = process.env.JWT_SECRET ?? 'LIFE IS BEAUTIFUL'
 
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET is not set. Using default secret. This is not recommended for production environments.')
@@ -29,13 +30,13 @@ export const loginHandler: RequestHandler = async (req, res) => {
   const isPasswordValid = await bcrypt.compare(password, user.password)
 
   if (!isPasswordValid) {
-    return res.status(401).json({ message: 'Invalid email or password' })
+    return res.status(401).json({ message: 'Invalid password or email' })
   }
 
   const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1d' })
   res.cookie('token', token, {
-    httpOnly: true,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    httpOnly: true,
     sameSite: 'strict',
     secure: process.env.NODE_ENV === 'production'
   })

@@ -2,7 +2,7 @@ import { prisma } from '#lib/prisma.js'
 // import * as z from 'zod'
 
 // user create
-export const createUser = async (data: { name: string; email: string; password: string }) => {
+export const createUser = async (data: { email: string; name: string; password: string }) => {
   // const dataTyped = z.object({ name: z.string(), email: z.string(), password: z.string() }).parse(data)
   // console.log(dataTyped, 'dataTyped')
   return prisma.user.create({ data })
@@ -46,16 +46,16 @@ export const getHabitsForUser = async (userId: string) => {
   return prisma.habits.findMany({ where: { userId } })
 }
 
-export const getHabitForUser = async (id: number) => {
-  return prisma.habits.findUnique({ where: { id } })
+export const getHabitForUser = async (id: number, userId: string) => {
+  return prisma.habits.findUnique({ where: { id, userId } })
 }
 
 export const createHabitForUser = async (userId: string, name: string) => {
-  return prisma.habits.create({ data: { userId, name } })
+  return prisma.habits.create({ data: { name, userId } })
 }
 
 export const updateHabitForUser = async (id: number, userId: string, name: string) => {
-  return prisma.habits.update({ where: { id, userId }, data: { name } })
+  return prisma.habits.update({ data: { name }, where: { id, userId } })
 }
 
 export const deleteHabitForUser = async (id: number, userId: string) => {
@@ -85,9 +85,9 @@ export const getallHabitsLogs = async () => {
 }
 export const getLastLogForHabit = async (habitId: number) => {
   return prisma.habit_logs.findFirst({
-    where: { habitId },
     orderBy: {
       log_date: 'desc'
-    }
+    },
+    where: { habitId }
   })
 }

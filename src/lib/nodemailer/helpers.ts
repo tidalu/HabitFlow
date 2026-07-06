@@ -1,14 +1,25 @@
-function didLogToday(logs: any[]) {
-  for (let i = 0; i < logs.length; i++) {
-    if (
-      logs[i].log_date.getDate() === new Date().getDate() &&
-      logs[i].log_date.getMonth() === new Date().getMonth() &&
-      logs[i].log_date.getFullYear() === new Date().getFullYear()
-    ) {
+function didLogToday(logs: { log_date: Date }[]) {
+  const today = new Date()
+
+  for (const log of logs) {
+    const { log_date } = log
+
+    if (log_date.getDate() === today.getDate() && log_date.getMonth() === today.getMonth() && log_date.getFullYear() === today.getFullYear()) {
       return true
     }
   }
+
   return false
+}
+
+function mailDataGen(email: string | string[], subject: string, text: string, html: string) {
+  return {
+    from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
+    html: html,
+    subject: subject,
+    text: text,
+    to: email instanceof Array ? email.join(',') : email
+  }
 }
 
 function makeHtmlBody1(name: string) {
@@ -160,21 +171,20 @@ function makeHtmlBody1(name: string) {
 </body>
 </html>`
 }
-
 function makeHtmlBody2({
-  name,
   habit_count,
   habits,
-  streak_days,
   has_more,
-  remaining_count
+  name,
+  remaining_count,
+  streak_days
 }: {
-  name: string
   habit_count: number
   habits: { name: string }[]
-  streak_days: number
   has_more: boolean
+  name: string
   remaining_count: number
+  streak_days: number
 }) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -292,7 +302,7 @@ function makeHtmlBody2({
       </div>
       <div class="card-body">
         <p>Hey ${name},</p>
-        <p>You haven't logged any of your habits yet today. You've got <strong>${habit_count} habit${habit_count > 1 ? 's' : ''}</strong> on your list — a quick check-in keeps your streak alive.</p>
+        <p>You haven't logged any of your habits yet today. You've got <strong>${habit_count.toString()} habit${habit_count > 1 ? 's' : ''}</strong> on your list — a quick check-in keeps your streak alive.</p>
 
         <ul class="habit-list">
           ${habits
@@ -305,13 +315,13 @@ function makeHtmlBody2({
           </li>`
             )
             .join('')}
-          ${has_more ? `<li class="more-label">+ ${remaining_count} more</li>` : ''}
+          ${has_more ? `<li class="more-label">+ ${remaining_count.toString()} more</li>` : ''}
         </ul>
 
         <div class="streak-box">
           <span class="streak-icon">🔥</span>
           <div class="streak-text">
-            <strong>${streak_days}-day streak</strong>
+            <strong>${streak_days.toString()}-day streak</strong>
             <span>Don't break the chain — log before midnight.</span>
           </div>
         </div>
@@ -330,14 +340,5 @@ function makeHtmlBody2({
   </div>
 </body>
 </html>`
-}
-function mailDataGen(email: string | string[], subject: string, text: string, html: string) {
-  return {
-    from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
-    html: html,
-    subject: subject,
-    text: text,
-    to: email instanceof Array ? email.join(',') : email
-  }
 }
 export { didLogToday, mailDataGen, makeHtmlBody1, makeHtmlBody2 }

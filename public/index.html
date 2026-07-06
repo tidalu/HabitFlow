@@ -267,6 +267,255 @@
         transform: translateY(-1px);
       }
 
+      /* HEALTH MODAL */
+      .health-modal[hidden] {
+        display: none;
+      }
+
+      .health-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+      }
+
+      .health-modal__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(3, 10, 9, 0.74);
+        backdrop-filter: blur(10px);
+      }
+
+      .health-modal__panel {
+        position: relative;
+        width: min(560px, 100%);
+        max-height: min(720px, calc(100vh - 2.5rem));
+        overflow: auto;
+        border: 0.5px solid var(--border2);
+        border-radius: 12px;
+        background: #111514;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+        animation: modalIn 0.22s ease both;
+      }
+
+      .health-modal__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.35rem;
+        border-bottom: 0.5px solid var(--border);
+      }
+
+      .health-modal__eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green-400);
+        margin-bottom: 0.35rem;
+      }
+
+      .health-modal__title {
+        font-family: var(--font-serif);
+        font-size: 1.55rem;
+        line-height: 1.1;
+        margin-bottom: 0;
+      }
+
+      .icon-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        border: 0.5px solid var(--border2);
+        border-radius: 8px;
+        background: transparent;
+        color: var(--text2);
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+
+      .icon-btn:hover {
+        color: var(--text);
+        border-color: rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .health-modal__body {
+        padding: 1.35rem;
+      }
+
+      .health-job {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .health-spinner {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: conic-gradient(var(--green-400), rgba(29, 158, 117, 0.08) 58%);
+        position: relative;
+        animation: spin 0.85s linear infinite;
+      }
+
+      .health-spinner::after {
+        content: '';
+        position: absolute;
+        inset: 6px;
+        border-radius: inherit;
+        background: #111514;
+      }
+
+      .health-status {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text);
+        margin-bottom: 0.65rem;
+      }
+
+      .health-meter {
+        height: 6px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .health-meter__bar {
+        height: 100%;
+        width: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--green-400), #60a5fa);
+        transition: width 0.28s ease;
+      }
+
+      .health-steps {
+        display: grid;
+        gap: 0.65rem;
+        margin-top: 1.35rem;
+      }
+
+      .health-step {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text3);
+      }
+
+      .health-step__dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        border: 1px solid var(--border2);
+        background: transparent;
+      }
+
+      .health-step.is-active {
+        color: var(--text);
+      }
+
+      .health-step.is-active .health-step__dot {
+        background: var(--green-400);
+        border-color: var(--green-400);
+        box-shadow: 0 0 0 5px rgba(29, 158, 117, 0.12);
+        animation: pulse 1s ease infinite;
+      }
+
+      .health-step.is-done {
+        color: var(--text2);
+      }
+
+      .health-step.is-done .health-step__dot {
+        background: var(--green-400);
+        border-color: var(--green-400);
+      }
+
+      .health-step.is-error {
+        color: #fca5a5;
+      }
+
+      .health-step.is-error .health-step__dot {
+        background: #f87171;
+        border-color: #f87171;
+      }
+
+      .health-response {
+        margin-top: 1.35rem;
+        border: 0.5px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      .health-response__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.75rem 0.9rem;
+        border-bottom: 0.5px solid var(--border);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text3);
+      }
+
+      .health-code {
+        margin: 0;
+        padding: 1rem;
+        min-height: 140px;
+        overflow: auto;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        line-height: 1.75;
+        color: var(--text2);
+        white-space: pre-wrap;
+      }
+
+      .health-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding: 0 1.35rem 1.35rem;
+      }
+
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.55;
+        }
+      }
+
       /* STATS */
       .stats {
         display: flex;
@@ -603,6 +852,15 @@
         .nav-links {
           gap: 1rem;
         }
+        .health-modal {
+          padding: 0.75rem;
+        }
+        .health-modal__panel {
+          max-height: calc(100vh - 1.5rem);
+        }
+        .health-job {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -652,7 +910,7 @@
           </svg>
           Browse API Docs
         </a>
-        <a href="/health" class="btn-ghost">
+        <a href="/health" class="btn-ghost" data-health-trigger>
           <svg
             width="15"
             height="15"
@@ -901,9 +1159,230 @@
       <span class="footer-brand">Habit<em style="font-style: italic; color: var(--green-400)">Flow</em></span>
       <div class="footer-links">
         <a href="/api-docs">Docs</a>
-        <a href="/health">Status</a>
+        <a href="/health" data-health-trigger>Status</a>
         <a href="https://github.com">GitHub</a>
       </div>
     </footer>
+
+    <div class="health-modal" id="healthModal" role="dialog" aria-modal="true" aria-labelledby="healthModalTitle" hidden>
+      <div class="health-modal__backdrop" data-health-close></div>
+      <div class="health-modal__panel">
+        <div class="health-modal__header">
+          <div>
+            <p class="health-modal__eyebrow">GET /health</p>
+            <h2 class="health-modal__title" id="healthModalTitle">Health request job</h2>
+          </div>
+          <button class="icon-btn" type="button" aria-label="Close health check modal" data-health-close>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="health-modal__body">
+          <div class="health-job">
+            <div class="health-spinner" aria-hidden="true"></div>
+            <div>
+              <p class="health-status" id="healthStatus" aria-live="polite">Preparing request...</p>
+              <div class="health-meter" aria-hidden="true">
+                <div class="health-meter__bar" id="healthProgress"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="health-steps" aria-label="Health check progress">
+            <div class="health-step" data-health-step="queue">
+              <span class="health-step__dot"></span>
+              <span>Queue background request</span>
+            </div>
+            <div class="health-step" data-health-step="send">
+              <span class="health-step__dot"></span>
+              <span>Send GET /health</span>
+            </div>
+            <div class="health-step" data-health-step="parse">
+              <span class="health-step__dot"></span>
+              <span>Parse JSON payload</span>
+            </div>
+            <div class="health-step" data-health-step="complete">
+              <span class="health-step__dot"></span>
+              <span>Render API response</span>
+            </div>
+          </div>
+
+          <div class="health-response">
+            <div class="health-response__head">
+              <span>response.json</span>
+              <span id="healthMeta">waiting</span>
+            </div>
+            <pre class="health-code" id="healthResponse">Click Health Check to run the endpoint.</pre>
+          </div>
+        </div>
+        <div class="health-actions">
+          <button class="btn-ghost" type="button" data-health-close>Close</button>
+          <button class="btn-green" type="button" id="healthRunAgain">Run again</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      ;(() => {
+        const modal = document.querySelector('#healthModal')
+        const triggers = document.querySelectorAll('[data-health-trigger]')
+        const closeButtons = document.querySelectorAll('[data-health-close]')
+        const runAgain = document.querySelector('#healthRunAgain')
+        const status = document.querySelector('#healthStatus')
+        const progress = document.querySelector('#healthProgress')
+        const response = document.querySelector('#healthResponse')
+        const meta = document.querySelector('#healthMeta')
+        const steps = [...document.querySelectorAll('[data-health-step]')]
+        let activeController = null
+        let activeRunId = 0
+
+        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+        const setStep = (stepName, state) => {
+          steps.forEach((step) => {
+            if (step.dataset.healthStep !== stepName) return
+            step.classList.remove('is-active', 'is-done', 'is-error')
+            if (state) step.classList.add(`is-${state}`)
+          })
+        }
+
+        const resetSteps = () => {
+          steps.forEach((step) => step.classList.remove('is-active', 'is-done', 'is-error'))
+        }
+
+        const openModal = () => {
+          modal.hidden = false
+          document.body.style.overflow = 'hidden'
+          modal.querySelector('[data-health-close]').focus()
+        }
+
+        const closeModal = () => {
+          activeRunId += 1
+          modal.hidden = true
+          document.body.style.overflow = ''
+          activeController?.abort()
+        }
+
+        const updatePhase = async ({ step, label, width, runId, delay = 420 }) => {
+          if (runId !== activeRunId) return false
+          status.textContent = label
+          progress.style.width = `${width}%`
+          setStep(step, 'active')
+          await wait(delay)
+          if (runId !== activeRunId) return false
+          setStep(step, 'done')
+          return true
+        }
+
+        const runHealthCheck = async () => {
+          const runId = activeRunId + 1
+          activeRunId = runId
+          activeController?.abort()
+          activeController = new AbortController()
+
+          resetSteps()
+          progress.style.width = '0%'
+          meta.textContent = 'running'
+          response.textContent = '{\n  "job": "queued"\n}'
+
+          const startedAt = performance.now()
+          const request = fetch('/health', {
+            headers: { Accept: 'application/json' },
+            signal: activeController.signal
+          }).then(async (res) => {
+            const contentType = res.headers.get('content-type') || ''
+            const payload = contentType.includes('application/json') ? await res.json() : await res.text()
+
+            return {
+              ok: res.ok,
+              payload,
+              status: res.status,
+              statusText: res.statusText
+            }
+          })
+
+          try {
+            if (!(await updatePhase({ step: 'queue', label: 'Queueing background request job...', width: 18, runId }))) return
+            if (!(await updatePhase({ step: 'send', label: 'Sending GET /health...', width: 48, runId, delay: 520 }))) return
+
+            if (runId !== activeRunId) return
+            status.textContent = 'Waiting for API response...'
+            progress.style.width = '68%'
+            const result = await request
+            if (runId !== activeRunId) return
+            const durationMs = Math.round(performance.now() - startedAt)
+
+            if (!(await updatePhase({ step: 'parse', label: 'Parsing response payload...', width: 84, runId, delay: 360 }))) return
+            if (
+              !(await updatePhase({
+                step: 'complete',
+                label: result.ok ? 'Health check passed.' : 'Health check returned an error.',
+                width: 100,
+                runId,
+                delay: 240
+              }))
+            ) {
+              return
+            }
+
+            meta.textContent = `${result.status} ${result.statusText || ''}`.trim()
+            response.textContent = JSON.stringify(
+              {
+                httpStatus: result.status,
+                durationMs,
+                response: result.payload
+              },
+              null,
+              2
+            )
+
+            if (!result.ok) setStep('complete', 'error')
+          } catch (error) {
+            if (runId !== activeRunId || error?.name === 'AbortError') return
+
+            steps.forEach((step) => {
+              if (!step.classList.contains('is-done')) step.classList.remove('is-active')
+            })
+            setStep('complete', 'error')
+            status.textContent = 'Health check failed.'
+            progress.style.width = '100%'
+            meta.textContent = 'network error'
+            response.textContent = JSON.stringify(
+              {
+                error: error.message || 'Unable to reach /health'
+              },
+              null,
+              2
+            )
+          }
+        }
+
+        triggers.forEach((trigger) => {
+          trigger.addEventListener('click', (event) => {
+            event.preventDefault()
+            openModal()
+            runHealthCheck()
+          })
+        })
+
+        closeButtons.forEach((button) => button.addEventListener('click', closeModal))
+        runAgain.addEventListener('click', runHealthCheck)
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && !modal.hidden) closeModal()
+        })
+      })()
+    </script>
   </body>
 </html>

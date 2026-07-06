@@ -1,6 +1,7 @@
-import { getLogsForHabit } from '#db/index.js'
 import { RequestHandler } from 'express'
 import { z } from 'zod'
+
+import { getHabitForUser, getLogsForHabit } from '#db/index.js'
 
 const schema = z.object({
   id: z.coerce.number().min(1, 'ID is required')
@@ -8,6 +9,12 @@ const schema = z.object({
 const getLogs: RequestHandler = async (req, res) => {
   try {
     const { id } = schema.parse(req.params)
+
+    const habit = await getHabitForUser(id, req.userId)
+    if (!habit) {
+      res.status(404).json({ message: 'Habit not found' })
+      return
+    }
 
     const logs = await getLogsForHabit(id)
     res.status(200).json({ data: logs })

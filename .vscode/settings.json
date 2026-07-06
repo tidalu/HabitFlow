@@ -1,5 +1,12 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "postman.settings.dotenv-detection-notification-visibility": false
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "args": ["--login", "-i", "--rcfile", "C:\\Users\\ulugi\\Desktop\\here\\dev\\backend\\pr-1\\habitFlow\\.vscode\\.terminal-init.sh"]
+    }
+  }
 }
