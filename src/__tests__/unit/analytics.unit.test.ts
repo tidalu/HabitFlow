@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { calculateStreak } from '#lib/analytics.js'
+import { calculateStreak } from '../../lib/analytics.js'
 
 const logData = [
   { habitId: 2, id: 1, log_date: new Date('2026-05-10T22:25:57.050Z'), userId: 'u1' },

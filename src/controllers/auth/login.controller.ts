@@ -3,7 +3,7 @@ import { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
 import * as z from 'zod'
 
-import { findUserByEmail } from '#db/index.js'
+import { findUserByEmail } from '../../db/index.js'
 
 const JWT_SECRET = process.env.JWT_SECRET ?? 'LIFE IS BEAUTIFUL'
 

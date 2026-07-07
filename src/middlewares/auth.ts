@@ -1,4 +1,4 @@
-// import { sessionDelete } from '#db/index.js'
+// import { sessionDelete } from '../db/index.js'
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 

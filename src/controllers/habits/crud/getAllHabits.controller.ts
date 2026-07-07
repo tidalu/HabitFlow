@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
 
-import { getHabitsForUser } from '#db/index.js'
+import { getHabitsForUser } from '../../../db/index.js'
 
 const getAllHabits: RequestHandler = async (req, res) => {
   try {

@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 import * as z from 'zod'
 
-import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '#db/index.js'
+import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '../../../db/index.js'
 
 import type { Habit_logs } from '../../../../types/schema'
 

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 
-import app from '#index.js'
+import app from '../../index.js'
 
 const token = jwt.sign({ userId: '1e08e022-1470-4edd-91f0-fdbe94a3c9a8' }, process.env.JWT_SECRET ?? 'LIFE IS BEAUTIFUL', { expiresIn: '1d' })
 

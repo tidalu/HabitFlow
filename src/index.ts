@@ -1,18 +1,18 @@
-import '#lib/cron.js'
+import './lib/cron.js'
 import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
 import Yaml from 'yamljs'
 
-import { notFoundHandler } from '#middlewares/404.js'
-import ErrorHandler from '#middlewares/error.js'
-import { middleware } from '#middlewares/middleware.js'
-import analyticsRoute from '#routes/analytics.route.js'
-import authRoute from '#routes/auth.route.js'
-import habitsRoute from '#routes/habits.route.js'
-import healthRoute from '#routes/health.route.js'
-import logsRoute from '#routes/logs.route.js'
+import { notFoundHandler } from './middlewares/404.js'
+import ErrorHandler from './middlewares/error.js'
+import { middleware } from './middlewares/middleware.js'
+import analyticsRoute from './routes/analytics.route.js'
+import authRoute from './routes/auth.route.js'
+import habitsRoute from './routes/habits.route.js'
+import healthRoute from './routes/health.route.js'
+import logsRoute from './routes/logs.route.js'
 
 const app = express()
 

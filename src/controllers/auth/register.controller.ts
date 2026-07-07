@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { RequestHandler } from 'express'
 import { z } from 'zod'
 
-import { createUser } from '#db/index.js'
+import { createUser } from '../../db/index.js'
 
 const SALT_ROUNDS = Number(process.env.BCRYPT_ROUNDS) || 10
 const schema = z.object({

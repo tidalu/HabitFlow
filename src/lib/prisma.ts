@@ -1,6 +1,10 @@
 import { withAccelerate } from '@prisma/extension-accelerate'
+import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
 
-import { PrismaClient } from '../generated/prisma/client' // your output path
+const require = createRequire(import.meta.url)
+const prismaClientPath = fileURLToPath(new URL('../../src/generated/prisma/client/index.js', import.meta.url))
+const { PrismaClient } = require(prismaClientPath) as typeof import('../generated/prisma/client')
 
 const databaseUrl = process.env.DATABASE_URL
 if (!databaseUrl) {

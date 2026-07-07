@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 import * as z from 'zod'
 
-import { createHabitForUser } from '#db/index.js'
+import { createHabitForUser } from '../../../db/index.js'
 
 const schema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100, 'Name too long')

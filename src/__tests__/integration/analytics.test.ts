@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken'
 import request from 'supertest'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { getHabitForUser, getLogsForHabit } from '#db/index.js'
-import app from '#index.js'
-import { calculateStreak } from '#lib/analytics.js'
+import { getHabitForUser, getLogsForHabit } from '../../db/index.js'
+import app from '../../index.js'
+import { calculateStreak } from '../../lib/analytics.js'
 
 // Mock only the DB layer — let the real calculateStreak logic run
-vi.mock('#db/index.js', () => ({
+vi.mock('../../db/index.js', () => ({
   getHabitForUser: vi.fn(),
   getLogsForHabit: vi.fn()
 }))

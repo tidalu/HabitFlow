@@ -1,7 +1,7 @@
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 
-import app from '#index.js'
+import app from '../../index.js'
 
 beforeAll(() => {
   vi.useFakeTimers()

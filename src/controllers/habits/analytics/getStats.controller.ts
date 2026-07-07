@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express'
 import * as z from 'zod'
 
-import { getHabitForUser, getLogsForHabit } from '#db/index.js'
-import { calculateStreak } from '#lib/analytics.js'
+import { getHabitForUser, getLogsForHabit } from '../../../db/index.js'
+import { calculateStreak } from '../../../lib/analytics.js'
 
 import type { StreakData } from '../../../../types/schema'
 
