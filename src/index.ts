@@ -14,11 +14,9 @@ import habitsRoute from '#routes/habits.route.js'
 import healthRoute from '#routes/health.route.js'
 import logsRoute from '#routes/logs.route.js'
 
-const port = process.env.PORT ?? '3000'
-
 const app = express()
 
-const swaggerSpec = Yaml.load('docs/swagger.yaml') as Record<string, any>
+const swaggerSpec = Yaml.load('docs/swagger.yaml') as Record<string, unknown>
 
 app.use(express.static('public'))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
@@ -37,25 +35,5 @@ app.use('/analytics', analyticsRoute)
 app.use(notFoundHandler)
 
 app.use(ErrorHandler)
-
-const server = app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason)
-
-  server.close(() => {
-    process.exit(1)
-  })
-})
-
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err)
-
-  server.close(() => {
-    process.exit(1)
-  })
-})
 
 export default app

@@ -14,12 +14,19 @@ const updateHabit: RequestHandler = async (req, res) => {
     const { name } = schema.pick({ name: true }).parse(req.body)
 
     const habit = await updateHabitForUser(id, req.userId, name)
+
     res.status(200).json({ data: habit })
   } catch (error) {
     if (error instanceof z.ZodError) {
       res.status(400).json({ message: error.issues[0].message })
       return
     }
+    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'P2025') {
+      return res.status(404).json({
+        message: 'Habit not found'
+      })
+    }
+
     res.status(500).json({ message: 'Error updating habit' })
   }
 }

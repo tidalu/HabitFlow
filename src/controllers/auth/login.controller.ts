@@ -23,7 +23,9 @@ export const loginHandler: RequestHandler = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' })
     }
   } catch (error) {
-    console.log(error)
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ message: error.issues[0].message })
+    }
     return res.status(500).json({ message: 'Internal server error' })
   }
 

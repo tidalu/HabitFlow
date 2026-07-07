@@ -22,7 +22,7 @@ export const calculateStreak = ({ habit_logs }: { habit_logs: HabitLogData[] }):
   const firstLog = completedDays[0]
   const lastLog = completedDays[completedDays.length - 1]
   const loggedDayCount = lastLog - firstLog + 1
-  const completionRate = (completedDays.length / loggedDayCount) * 100
+  const completionRate = +((completedDays.length / loggedDayCount) * 100).toFixed(2)
 
   const today = toUtcDay(new Date())
   const diff = today - lastLog
