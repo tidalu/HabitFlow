@@ -1,16 +1,27 @@
-import { z } from 'zod'
+export type User = {
+  email: string
+  id: string
+  name: string
+  password: string
+}
 
-const User = z.object({ email: z.string(), id: z.string(), name: z.string(), password: z.string() })
-const Habits = z.object({ createdAt: z.date(), id: z.number(), name: z.string(), userId: z.string() })
-const Habit_logs = z.object({ habitId: z.number(), id: z.number(), log_date: z.date(), userId: z.string() })
-const StreakData = z.object({ completionRate: z.number(), currentStreak: z.number(), longestStreak: z.number(), totalCompletions: z.number() })
+export type Habits = {
+  createdAt: Date
+  id: number
+  name: string
+  userId: string
+}
 
-type Habit_logs = z.infer<typeof Habit_logs>
+export type Habit_logs = {
+  habitId: number
+  id: number
+  log_date: Date
+  userId: string
+}
 
-type Habits = z.infer<typeof Habits>
-
-type StreakData = z.infer<typeof StreakData>
-
-type User = z.infer<typeof User>
-
-export type { Habit_logs, Habits, StreakData, User }
+export type StreakData = {
+  completionRate: number
+  currentStreak: number
+  longestStreak: number
+  totalCompletions: number
+}

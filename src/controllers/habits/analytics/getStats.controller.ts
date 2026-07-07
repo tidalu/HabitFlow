@@ -4,7 +4,7 @@ import * as z from 'zod'
 import { getHabitForUser, getLogsForHabit } from '#db/index.js'
 import { calculateStreak } from '#lib/analytics.js'
 
-import { StreakData } from '../../../../types/schema'
+import type { StreakData } from '../../../../types/schema'
 
 const getStats: RequestHandler = async (req, res) => {
   try {
