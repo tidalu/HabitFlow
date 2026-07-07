@@ -45,7 +45,7 @@ export async function sendMail() {
               'hello world',
               makeHtmlBody2({
                 habit_count: user.habits.length,
-                habits: user.habits.slice(0, 3).map((h) => ({ name: h.name })),
+                habits: user.habits.slice(0, 3).map((h: (typeof user.habits)[0]) => ({ name: h.name })),
                 has_more: user.habits.length > 3,
                 name: user.name,
                 remaining_count: user.habits.length - 3,

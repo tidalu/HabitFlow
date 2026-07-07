@@ -39,12 +39,7 @@ export const registerHandler: RequestHandler = async (req, res, next) => {
     })
   } catch (error: unknown) {
     // Prisma unique constraint
-    if (
-      typeof error === 'object' &&
-      error !== null &&
-      'code' in error &&
-      (error as { code?: string }).code === 'P2002'
-    ) {
+    if (typeof error === 'object' && error !== null && 'code' in error && (error as { code?: string }).code === 'P2002') {
       return res.status(409).json({
         message: 'Email already exists'
       })

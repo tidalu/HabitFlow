@@ -14,17 +14,17 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
+        tsconfigRootDir: import.meta.dirname
+      }
+    }
   },
   {
     files: ['**/*.test.ts', '**/*.spec.ts'],
     plugins: { vitest },
     rules: {
       ...vitest.configs.recommended.rules,
-      '@typescript-eslint/unbound-method': 'off',
-    },
+      '@typescript-eslint/unbound-method': 'off'
+    }
   },
-  perfectionist.configs['recommended-natural'],
+  perfectionist.configs['recommended-natural']
 )

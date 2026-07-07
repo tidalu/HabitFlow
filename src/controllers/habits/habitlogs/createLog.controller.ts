@@ -20,7 +20,6 @@ const createLog: RequestHandler = async (req, res) => {
     const logs = (await getLastLogForHabit(id)) as Habit_logs
 
     const sameDay =
-      logs &&
       logs.log_date.getDate() === new Date().getDate() &&
       logs.log_date.getMonth() === new Date().getMonth() &&
       logs.log_date.getFullYear() === new Date().getFullYear()

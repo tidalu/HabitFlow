@@ -3,6 +3,7 @@
 Personal Habit Tracker API
 
 ## Features
+
 - User registration and login with JWT authentication
 - Full CRUD for habits — create, read, update, delete
 - Daily log entries per habit with date tracking
