@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2023",
@@ -9,6 +9,6 @@
     "esModuleInterop": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "types/**/*.d.ts"],
   "exclude": ["**/*.test.ts", "**/*.spec.ts", "src/__tests__"]
 }
