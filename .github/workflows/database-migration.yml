@@ -9,7 +9,7 @@ env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
-  quality-checks:
+  database-migration-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
