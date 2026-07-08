@@ -7,6 +7,7 @@ export interface Habit_logs {
 
 export interface Habits {
   createdAt: Date
+  description: string
   id: number
   name: string
   userId: string
