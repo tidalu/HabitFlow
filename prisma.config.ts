@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import { defineConfig } from 'prisma/config'
 
-const url = process.env.DATABASE_URL ?? 'postgresql://placeholder'
+const url = process.env.DIRECT_URL ?? 'postgresql://placeholder'
 
 if (!url) {
-  throw new Error('DATABASE_URL must be set in .env')
+  throw new Error('DIRECT_URL must be set in .env')
 }
 
 export default defineConfig({
