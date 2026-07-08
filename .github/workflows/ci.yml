@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  SMTP_USER: ${{ secrets.SMTP_USER }}
+  SMTP_PASS: ${{ secrets.SMTP_PASS }}
 
 jobs:
   quality-checks:
