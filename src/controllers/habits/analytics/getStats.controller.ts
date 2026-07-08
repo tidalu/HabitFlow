@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express'
 import * as z from 'zod'
 
+import type { StreakData } from '../../../../types/schema'
+
 import { getHabitForUser, getLogsForHabit } from '../../../db/index.js'
 import { calculateStreak } from '../../../lib/analytics.js'
-
-import type { StreakData } from '../../../../types/schema'
 
 const getStats: RequestHandler = async (req, res) => {
   try {

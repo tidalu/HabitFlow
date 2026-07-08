@@ -1,9 +1,8 @@
-
 /**
  * Client
-**/
+ **/
 
-import * as runtime from './runtime/client.js';
+import * as runtime from './runtime/client.js'
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -12,25 +11,24 @@ import $Result = runtime.Types.Result
 
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
-
 /**
  * Model User
- * 
+ *
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
  * Model Sessions
- * 
+ *
  */
 export type Sessions = $Result.DefaultSelection<Prisma.$SessionsPayload>
 /**
  * Model Habits
- * 
+ *
  */
 export type Habits = $Result.DefaultSelection<Prisma.$HabitsPayload>
 /**
  * Model Habit_logs
- * 
+ *
  */
 export type Habit_logs = $Result.DefaultSelection<Prisma.$Habit_logsPayload>
 
@@ -52,12 +50,16 @@ export type Habit_logs = $Result.DefaultSelection<Prisma.$Habit_logsPayload>
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  const U = 'log' extends keyof ClientOptions
+    ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
+      ? Prisma.GetEvents<ClientOptions['log']>
+      : never
+    : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
-    /**
+  /**
    * ##  Prisma Client ʲˢ
    *
    * Type-safe database client for TypeScript & Node.js
@@ -74,20 +76,20 @@ export class PrismaClient<
    * Read more in our [docs](https://pris.ly/d/client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+  constructor(optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>)
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient
 
   /**
    * Connect with the database
    */
-  $connect(): $Utils.JsPromise<void>;
+  $connect(): $Utils.JsPromise<void>
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): $Utils.JsPromise<void>;
+  $disconnect(): $Utils.JsPromise<void>
 
-/**
+  /**
    * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
@@ -96,7 +98,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -108,7 +110,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -119,7 +121,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -131,8 +133,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
-  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
-
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -144,56 +145,70 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(
+    arg: [...P],
+    options?: { maxWait?: number; timeout?: number; isolationLevel?: Prisma.TransactionIsolationLevel }
+  ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
-  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+  $transaction<R>(
+    fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>,
+    options?: { maxWait?: number; timeout?: number; isolationLevel?: Prisma.TransactionIsolationLevel }
+  ): $Utils.JsPromise<R>
 
-  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
-    extArgs: ExtArgs
-  }>>
+  $extends: $Extensions.ExtendsHook<
+    'extends',
+    Prisma.TypeMapCb<ClientOptions>,
+    ExtArgs,
+    $Utils.Call<
+      Prisma.TypeMapCb<ClientOptions>,
+      {
+        extArgs: ExtArgs
+      }
+    >
+  >
 
-      /**
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
+   * ```
+   */
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>
 
   /**
    * `prisma.sessions`: Exposes CRUD operations for the **Sessions** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Sessions
-    * const sessions = await prisma.sessions.findMany()
-    * ```
-    */
-  get sessions(): Prisma.SessionsDelegate<ExtArgs, ClientOptions>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Sessions
+   * const sessions = await prisma.sessions.findMany()
+   * ```
+   */
+  get sessions(): Prisma.SessionsDelegate<ExtArgs, ClientOptions>
 
   /**
    * `prisma.habits`: Exposes CRUD operations for the **Habits** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Habits
-    * const habits = await prisma.habits.findMany()
-    * ```
-    */
-  get habits(): Prisma.HabitsDelegate<ExtArgs, ClientOptions>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Habits
+   * const habits = await prisma.habits.findMany()
+   * ```
+   */
+  get habits(): Prisma.HabitsDelegate<ExtArgs, ClientOptions>
 
   /**
    * `prisma.habit_logs`: Exposes CRUD operations for the **Habit_logs** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Habit_logs
-    * const habit_logs = await prisma.habit_logs.findMany()
-    * ```
-    */
-  get habit_logs(): Prisma.Habit_logsDelegate<ExtArgs, ClientOptions>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Habit_logs
+   * const habit_logs = await prisma.habit_logs.findMany()
+   * ```
+   */
+  get habit_logs(): Prisma.Habit_logsDelegate<ExtArgs, ClientOptions>
 }
 
 export namespace Prisma {
@@ -224,8 +239,6 @@ export namespace Prisma {
   export import raw = runtime.raw
   export import Sql = runtime.Sql
 
-
-
   /**
    * Decimal.js
    */
@@ -234,8 +247,8 @@ export namespace Prisma {
   export type DecimalJsLike = runtime.DecimalJsLike
 
   /**
-  * Extensions
-  */
+   * Extensions
+   */
   export import Extension = $Extensions.UserArgs
   export import getExtensionContext = runtime.Extensions.getExtensionContext
   export import Args = $Public.Args
@@ -258,7 +271,6 @@ export namespace Prisma {
    * Utility Types
    */
 
-
   export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
@@ -274,36 +286,36 @@ export namespace Prisma {
    */
   namespace NullTypes {
     /**
-    * Type of `Prisma.DbNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.DbNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class DbNull {
       private DbNull: never
       private constructor()
     }
 
     /**
-    * Type of `Prisma.JsonNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.JsonNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class JsonNull {
       private JsonNull: never
       private constructor()
     }
 
     /**
-    * Type of `Prisma.AnyNull`.
-    *
-    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-    *
-    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-    */
+     * Type of `Prisma.AnyNull`.
+     *
+     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+     *
+     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+     */
     class AnyNull {
       private AnyNull: never
       private constructor()
@@ -344,7 +356,7 @@ export namespace Prisma {
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T
 
   /**
    * Get the return type of a function which returns a Promise.
@@ -355,11 +367,10 @@ export namespace Prisma {
    * From T, pick a set of properties whose keys are in the union K
    */
   type Prisma__Pick<T, K extends keyof T> = {
-      [P in K]: T[P];
-  };
+    [P in K]: T[P]
+  }
 
-
-  export type Enumerable<T> = T | Array<T>;
+  export type Enumerable<T> = T | Array<T>
 
   export type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
@@ -376,8 +387,8 @@ export namespace Prisma {
    * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
    */
   export type Subset<T, U> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never;
-  };
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  }
 
   /**
    * SelectSubset
@@ -386,12 +397,11 @@ export namespace Prisma {
    */
   export type SelectSubset<T, U> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    (T extends SelectAndInclude
-      ? 'Please either choose `select` or `include`.'
-      : T extends SelectAndOmit
-        ? 'Please either choose `select` or `omit`.'
-        : {})
+  } & (T extends SelectAndInclude
+    ? 'Please either choose `select` or `include`.'
+    : T extends SelectAndOmit
+      ? 'Please either choose `select` or `omit`.'
+      : {})
 
   /**
    * Subset + Intersection
@@ -399,37 +409,21 @@ export namespace Prisma {
    */
   export type SubsetIntersection<T, U, K> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    K
+  } & K
 
-  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
 
   /**
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> =
-    T extends object ?
-    U extends object ?
-      (Without<T, U> & U) | (Without<U, T> & T)
-    : U : T
-
+  type XOR<T, U> = T extends object ? (U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : U) : T
 
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> = T extends Array<any>
-  ? False
-  : T extends Date
-  ? False
-  : T extends Uint8Array
-  ? False
-  : T extends BigInt
-  ? False
-  : T extends object
-  ? True
-  : False
-
+  type IsObject<T extends any> =
+    T extends Array<any> ? False : T extends Date ? False : T extends Uint8Array ? False : T extends BigInt ? False : T extends object ? True : False
 
   /**
    * If it's T[], return T
@@ -450,20 +444,12 @@ export namespace Prisma {
 
   type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
 
-  type _Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean
-  > = {
+  type _Either<O extends object, K extends Key, strict extends Boolean> = {
     1: EitherStrict<O, K>
     0: EitherLoose<O, K>
   }[strict]
 
-  type Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1
-  > = O extends unknown ? _Either<O, K, strict> : never
+  type Either<O extends object, K extends Key, strict extends Boolean = 1> = O extends unknown ? _Either<O, K, strict> : never
 
   export type Union = any
 
@@ -472,57 +458,58 @@ export namespace Prisma {
   } & {}
 
   /** Helper Types for "Merge" **/
-  export type IntersectOf<U extends Union> = (
-    U extends unknown ? (k: U) => void : never
-  ) extends (k: infer I) => void
-    ? I
-    : never
+  export type IntersectOf<U extends Union> = (U extends unknown ? (k: U) => void : never) extends (k: infer I) => void ? I : never
 
   export type Overwrite<O extends object, O1 extends object> = {
-      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
-  } & {};
+    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K]
+  } & {}
 
-  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
-      [K in keyof U]-?: At<U, K>;
-  }>>;
+  type _Merge<U extends object> = IntersectOf<
+    Overwrite<
+      U,
+      {
+        [K in keyof U]-?: At<U, K>
+      }
+    >
+  >
 
-  type Key = string | number | symbol;
-  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
-  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
-  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  type Key = string | number | symbol
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O]
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never
   export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
-      1: AtStrict<O, K>;
-      0: AtLoose<O, K>;
-  }[strict];
+    1: AtStrict<O, K>
+    0: AtLoose<O, K>
+  }[strict]
 
-  export type ComputeRaw<A extends any> = A extends Function ? A : {
-    [K in keyof A]: A[K];
-  } & {};
+  export type ComputeRaw<A extends any> = A extends Function
+    ? A
+    : {
+        [K in keyof A]: A[K]
+      } & {}
 
   export type OptionalFlat<O> = {
-    [K in keyof O]?: O[K];
-  } & {};
+    [K in keyof O]?: O[K]
+  } & {}
 
   type _Record<K extends keyof any, T> = {
-    [P in K]: T;
-  };
+    [P in K]: T
+  }
 
   // cause typescript not to expand types and preserve names
-  type NoExpand<T> = T extends unknown ? T : never;
+  type NoExpand<T> = T extends unknown ? T : never
 
   // this type assumes the passed object is entirely optional
   type AtLeast<O extends object, K extends string> = NoExpand<
-    O extends unknown
-    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
-    : never>;
+    O extends unknown ? (K extends keyof O ? { [P in K]: O[P] } & O : O) | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O) : never
+  >
 
-  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never
 
-  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>
   /** End Helper Types for "Merge" **/
 
-  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>
 
   /**
   A [[Boolean]]
@@ -547,12 +534,10 @@ export namespace Prisma {
   export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
     ? 0 // anything `never` is false
     : A1 extends A2
-    ? 1
-    : 0
+      ? 1
+      : 0
 
-  export type Has<U extends Union, U1 extends Union> = Not<
-    Extends<Exclude<U1, U>, U1>
-  >
+  export type Has<U extends Union, U1 extends Union> = Not<Extends<Exclude<U1, U>, U1>>
 
   export type Or<B1 extends Boolean, B2 extends Boolean> = {
     0: {
@@ -567,32 +552,24 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  type Cast<A, B> = A extends B ? A : B;
+  type Cast<A, B> = A extends B ? A : B
 
-  export const type: unique symbol;
-
-
+  export const type: unique symbol
 
   /**
    * Used by group by
    */
 
-  export type GetScalarType<T, O> = O extends object ? {
-    [P in keyof T]: P extends keyof O
-      ? O[P]
-      : never
-  } : never
+  export type GetScalarType<T, O> = O extends object
+    ? {
+        [P in keyof T]: P extends keyof O ? O[P] : never
+      }
+    : never
 
-  type FieldPaths<
-    T,
-    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
-  > = IsObject<T> extends True ? U : T
+  type FieldPaths<T, U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>> = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
-    [K in keyof T]: Or<
-      Or<Extends<'OR', K>, Extends<'AND', K>>,
-      Extends<'NOT', K>
-    > extends True
+    [K in keyof T]: Or<Or<Extends<'OR', K>, Extends<'AND', K>>, Extends<'NOT', K>> extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
@@ -600,8 +577,8 @@ export namespace Prisma {
         ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
         : never
       : {} extends FieldPaths<T[K]>
-      ? never
-      : K
+        ? never
+        : K
   }[keyof T]
 
   /**
@@ -621,24 +598,20 @@ export namespace Prisma {
    */
   type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
 
-
   export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
 
   type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
 
-
   export const ModelName: {
-    User: 'User',
-    Sessions: 'Sessions',
-    Habits: 'Habits',
+    User: 'User'
+    Sessions: 'Sessions'
+    Habits: 'Habits'
     Habit_logs: 'Habit_logs'
-  };
+  }
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
-
-
-  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{ extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
     returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
@@ -647,7 +620,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "sessions" | "habits" | "habit_logs"
+      modelProps: 'user' | 'sessions' | 'habits' | 'habit_logs'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -953,25 +926,25 @@ export namespace Prisma {
       payload: any
       operations: {
         $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
           result: any
         }
         $executeRawUnsafe: {
-          args: [query: string, ...values: any[]],
+          args: [query: string, ...values: any[]]
           result: any
         }
         $queryRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
           result: any
         }
         $queryRawUnsafe: {
-          args: [query: string, ...values: any[]],
+          args: [query: string, ...values: any[]]
           result: any
         }
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export const defineExtension: $Extensions.ExtendsHook<'define', Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -984,7 +957,7 @@ export namespace Prisma {
      * ```
      * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
-     * 
+     *
      * // Emit as events only
      * log: [
      *   { emit: 'event', level: 'query' },
@@ -992,14 +965,14 @@ export namespace Prisma {
      *   { emit: 'event', level: 'warn' }
      *   { emit: 'event', level: 'error' }
      * ]
-     * 
+     *
      * / Emit as events and log to stdout
      * og: [
      *  { emit: 'stdout', level: 'query' },
      *  { emit: 'stdout', level: 'info' },
      *  { emit: 'stdout', level: 'warn' }
      *  { emit: 'stdout', level: 'error' }
-     * 
+     *
      * ```
      * Read more in our [docs](https://pris.ly/d/logging).
      */
@@ -1024,7 +997,7 @@ export namespace Prisma {
     accelerateUrl?: string
     /**
      * Global configuration for omitting model fields by default.
-     * 
+     *
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -1040,7 +1013,7 @@ export namespace Prisma {
     /**
      * SQL commenter plugins that add metadata to SQL queries as comments.
      * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
-     * 
+     *
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -1068,15 +1041,11 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never
 
-  export type GetLogType<T> = CheckIsLogLevel<
-    T extends LogDefinition ? T['level'] : T
-  >;
+  export type GetLogType<T> = CheckIsLogLevel<T extends LogDefinition ? T['level'] : T>
 
-  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
-    ? GetLogType<T[number]>
-    : never;
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]> : never
 
   export type QueryEvent = {
     timestamp: Date
@@ -1092,7 +1061,6 @@ export namespace Prisma {
     target: string
   }
   /* End Types for Logging */
-
 
   export type PrismaAction =
     | 'findUnique'
@@ -1118,7 +1086,7 @@ export namespace Prisma {
     | 'groupBy'
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined
 
   /**
    * `PrismaClient` proxy available in interactive transactions.
@@ -1132,7 +1100,6 @@ export namespace Prisma {
   /**
    * Count Types
    */
-
 
   /**
    * Count Type UserCountOutputType
@@ -1182,7 +1149,6 @@ export namespace Prisma {
     where?: SessionsWhereInput
   }
 
-
   /**
    * Count Type HabitsCountOutputType
    */
@@ -1212,7 +1178,6 @@ export namespace Prisma {
   export type HabitsCountOutputTypeCountLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Habit_logsWhereInput
   }
-
 
   /**
    * Models
@@ -1253,7 +1218,6 @@ export namespace Prisma {
     _all: number
   }
 
-
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
@@ -1286,58 +1250,55 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Users
-    **/
+     **/
     _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: UserMaxAggregateInputType
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
       : GetScalarType<T[P], AggregateUser[P]>
   }
-
-
-
 
   export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
@@ -1364,45 +1325,52 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
+      PickEnumerable<UserGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], UserGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], UserGroupByOutputType[P]>
+      }
     >
+  >
 
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      email?: boolean
+      name?: boolean
+      password?: boolean
+      createdAt?: boolean
+      logs?: boolean | User$logsArgs<ExtArgs>
+      habits?: boolean | User$habitsArgs<ExtArgs>
+      sessions?: boolean | User$sessionsArgs<ExtArgs>
+      _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['user']
+  >
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    email?: boolean
-    name?: boolean
-    password?: boolean
-    createdAt?: boolean
-    logs?: boolean | User$logsArgs<ExtArgs>
-    habits?: boolean | User$habitsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      email?: boolean
+      name?: boolean
+      password?: boolean
+      createdAt?: boolean
+    },
+    ExtArgs['result']['user']
+  >
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    email?: boolean
-    name?: boolean
-    password?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["user"]>
-
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    email?: boolean
-    name?: boolean
-    password?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["user"]>
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      email?: boolean
+      name?: boolean
+      password?: boolean
+      createdAt?: boolean
+    },
+    ExtArgs['result']['user']
+  >
 
   export type UserSelectScalar = {
     id?: boolean
@@ -1412,7 +1380,10 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    'id' | 'email' | 'name' | 'password' | 'createdAt',
+    ExtArgs['result']['user']
+  >
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     logs?: boolean | User$logsArgs<ExtArgs>
     habits?: boolean | User$habitsArgs<ExtArgs>
@@ -1423,31 +1394,36 @@ export namespace Prisma {
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
+    name: 'User'
     objects: {
       logs: Prisma.$Habit_logsPayload<ExtArgs>[]
       habits: Prisma.$HabitsPayload<ExtArgs>[]
       sessions: Prisma.$SessionsPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      email: string
-      name: string
-      password: string
-      createdAt: Date
-    }, ExtArgs["result"]["user"]>
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        email: string
+        name: string
+        password: string
+        createdAt: Date
+      },
+      ExtArgs['result']['user']
+    >
     composites: {}
   }
 
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserCountAggregateInputType | true
-    }
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    UserFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: UserCountAggregateInputType | true
+  }
 
   export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User']; meta: { name: 'User' } }
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -1459,7 +1435,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UserFindUniqueArgs>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find one User that matches the filter or throw an error with `error.code='P2025'`
@@ -1473,7 +1456,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first User that matches the filter.
@@ -1488,7 +1478,9 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UserFindFirstArgs>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first User that matches the filter or
@@ -1504,7 +1496,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find zero or more Users that matches the filter.
@@ -1514,15 +1513,17 @@ export namespace Prisma {
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
-     * 
+     *
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UserFindManyArgs>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>>
 
     /**
      * Create a User.
@@ -1534,9 +1535,11 @@ export namespace Prisma {
      *     // ... data to create a User
      *   }
      * })
-     * 
+     *
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UserCreateArgs>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Users.
@@ -1548,7 +1551,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1562,7 +1565,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Users and only return the `id`
      * const userWithIdOnly = await prisma.user.createManyAndReturn({
      *   select: { id: true },
@@ -1572,9 +1575,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Delete a User.
@@ -1586,9 +1591,11 @@ export namespace Prisma {
      *     // ... filter to delete one User
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UserDeleteArgs>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one User.
@@ -1603,9 +1610,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UserUpdateArgs>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Users.
@@ -1617,7 +1626,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1636,7 +1645,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1653,7 +1662,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Users and only return the `id`
      * const userWithIdOnly = await prisma.user.updateManyAndReturn({
      *   select: { id: true },
@@ -1666,9 +1675,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Create or update one User.
@@ -1687,8 +1698,9 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends UserUpsertArgs>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Count the number of Users.
@@ -1702,15 +1714,11 @@ export namespace Prisma {
      *     // ... the filter for the Users we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+      args?: Subset<T, UserCountArgs>
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
-        : number
+      T extends $Utils.Record<'select', any> ? (T['select'] extends true ? number : GetScalarType<T['select'], UserCountAggregateOutputType>) : number
     >
 
     /**
@@ -1736,7 +1744,7 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
+     **/
     aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
@@ -1755,17 +1763,12 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends UserGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake ? { orderBy: UserGroupByArgs['orderBy'] } : { orderBy?: UserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1773,52 +1776,43 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the User model
-   */
-  readonly fields: UserFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+    >(
+      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the User model
+     */
+    readonly fields: UserFieldRefs
   }
 
   /**
@@ -1827,18 +1821,32 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    logs<T extends User$logsArgs<ExtArgs> = {}>(args?: Subset<T, User$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    habits<T extends User$habitsArgs<ExtArgs> = {}>(args?: Subset<T, User$habitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  export interface Prisma__UserClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {}
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    logs<T extends User$logsArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$logsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null>
+    habits<T extends User$habitsArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$habitsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$sessionsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -1854,20 +1862,16 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
-
-
-
   /**
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly id: FieldRef<'User', 'String'>
+    readonly email: FieldRef<'User', 'String'>
+    readonly name: FieldRef<'User', 'String'>
+    readonly password: FieldRef<'User', 'String'>
+    readonly createdAt: FieldRef<'User', 'DateTime'>
   }
-    
 
   // Custom InputTypes
   /**
@@ -1936,31 +1940,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -1988,31 +1992,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -2040,31 +2044,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -2348,7 +2352,6 @@ export namespace Prisma {
     include?: UserInclude<ExtArgs> | null
   }
 
-
   /**
    * Model Sessions
    */
@@ -2388,7 +2391,6 @@ export namespace Prisma {
     _all: number
   }
 
-
   export type SessionsAvgAggregateInputType = {
     session_id?: true
   }
@@ -2423,70 +2425,67 @@ export namespace Prisma {
     where?: SessionsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Sessions to fetch.
      */
     orderBy?: SessionsOrderByWithRelationInput | SessionsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: SessionsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Sessions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Sessions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Sessions
-    **/
+     **/
     _count?: true | SessionsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
+     **/
     _avg?: SessionsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
+     **/
     _sum?: SessionsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: SessionsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: SessionsMaxAggregateInputType
   }
 
   export type GetSessionsAggregateType<T extends SessionsAggregateArgs> = {
-        [P in keyof T & keyof AggregateSessions]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateSessions]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateSessions[P]>
       : GetScalarType<T[P], AggregateSessions[P]>
   }
-
-
-
 
   export type SessionsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionsWhereInput
@@ -2515,38 +2514,45 @@ export namespace Prisma {
 
   type GetSessionsGroupByPayload<T extends SessionsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SessionsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SessionsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SessionsGroupByOutputType[P]>
+      PickEnumerable<SessionsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof SessionsGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], SessionsGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], SessionsGroupByOutputType[P]>
+      }
     >
+  >
 
+  export type SessionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      session_id?: boolean
+      expires?: boolean
+      userId?: boolean
+      User?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['sessions']
+  >
 
-  export type SessionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    session_id?: boolean
-    expires?: boolean
-    userId?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessions"]>
+  export type SessionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      session_id?: boolean
+      expires?: boolean
+      userId?: boolean
+      User?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['sessions']
+  >
 
-  export type SessionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    session_id?: boolean
-    expires?: boolean
-    userId?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessions"]>
-
-  export type SessionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    session_id?: boolean
-    expires?: boolean
-    userId?: boolean
-    User?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessions"]>
+  export type SessionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      session_id?: boolean
+      expires?: boolean
+      userId?: boolean
+      User?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['sessions']
+  >
 
   export type SessionsSelectScalar = {
     session_id?: boolean
@@ -2554,7 +2560,10 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type SessionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"session_id" | "expires" | "userId", ExtArgs["result"]["sessions"]>
+  export type SessionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    'session_id' | 'expires' | 'userId',
+    ExtArgs['result']['sessions']
+  >
   export type SessionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2566,27 +2575,32 @@ export namespace Prisma {
   }
 
   export type $SessionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Sessions"
+    name: 'Sessions'
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
     }
-    scalars: $Extensions.GetPayloadResult<{
-      session_id: number
-      expires: Date
-      userId: string
-    }, ExtArgs["result"]["sessions"]>
+    scalars: $Extensions.GetPayloadResult<
+      {
+        session_id: number
+        expires: Date
+        userId: string
+      },
+      ExtArgs['result']['sessions']
+    >
     composites: {}
   }
 
   type SessionsGetPayload<S extends boolean | null | undefined | SessionsDefaultArgs> = $Result.GetResult<Prisma.$SessionsPayload, S>
 
-  type SessionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SessionsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SessionsCountAggregateInputType | true
-    }
+  type SessionsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    SessionsFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: SessionsCountAggregateInputType | true
+  }
 
   export interface SessionsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Sessions'], meta: { name: 'Sessions' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Sessions']; meta: { name: 'Sessions' } }
     /**
      * Find zero or one Sessions that matches the filter.
      * @param {SessionsFindUniqueArgs} args - Arguments to find a Sessions
@@ -2598,7 +2612,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends SessionsFindUniqueArgs>(args: SelectSubset<T, SessionsFindUniqueArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends SessionsFindUniqueArgs>(
+      args: SelectSubset<T, SessionsFindUniqueArgs<ExtArgs>>
+    ): Prisma__SessionsClient<
+      $Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find one Sessions that matches the filter or throw an error with `error.code='P2025'`
@@ -2612,7 +2633,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SessionsFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends SessionsFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, SessionsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SessionsClient<
+      $Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Sessions that matches the filter.
@@ -2627,7 +2655,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends SessionsFindFirstArgs>(args?: SelectSubset<T, SessionsFindFirstArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends SessionsFindFirstArgs>(
+      args?: SelectSubset<T, SessionsFindFirstArgs<ExtArgs>>
+    ): Prisma__SessionsClient<
+      $Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Sessions that matches the filter or
@@ -2643,7 +2678,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends SessionsFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends SessionsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, SessionsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SessionsClient<
+      $Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find zero or more Sessions that matches the filter.
@@ -2653,15 +2695,17 @@ export namespace Prisma {
      * @example
      * // Get all Sessions
      * const sessions = await prisma.sessions.findMany()
-     * 
+     *
      * // Get first 10 Sessions
      * const sessions = await prisma.sessions.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `session_id`
      * const sessionsWithSession_idOnly = await prisma.sessions.findMany({ select: { session_id: true } })
-     * 
+     *
      */
-    findMany<T extends SessionsFindManyArgs>(args?: SelectSubset<T, SessionsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends SessionsFindManyArgs>(
+      args?: SelectSubset<T, SessionsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>>
 
     /**
      * Create a Sessions.
@@ -2673,9 +2717,11 @@ export namespace Prisma {
      *     // ... data to create a Sessions
      *   }
      * })
-     * 
+     *
      */
-    create<T extends SessionsCreateArgs>(args: SelectSubset<T, SessionsCreateArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends SessionsCreateArgs>(
+      args: SelectSubset<T, SessionsCreateArgs<ExtArgs>>
+    ): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'create', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Sessions.
@@ -2687,7 +2733,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends SessionsCreateManyArgs>(args?: SelectSubset<T, SessionsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2701,7 +2747,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Sessions and only return the `session_id`
      * const sessionsWithSession_idOnly = await prisma.sessions.createManyAndReturn({
      *   select: { session_id: true },
@@ -2711,9 +2757,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends SessionsCreateManyAndReturnArgs>(args?: SelectSubset<T, SessionsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends SessionsCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, SessionsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Delete a Sessions.
@@ -2725,9 +2773,11 @@ export namespace Prisma {
      *     // ... filter to delete one Sessions
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends SessionsDeleteArgs>(args: SelectSubset<T, SessionsDeleteArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends SessionsDeleteArgs>(
+      args: SelectSubset<T, SessionsDeleteArgs<ExtArgs>>
+    ): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Sessions.
@@ -2742,9 +2792,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends SessionsUpdateArgs>(args: SelectSubset<T, SessionsUpdateArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends SessionsUpdateArgs>(
+      args: SelectSubset<T, SessionsUpdateArgs<ExtArgs>>
+    ): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'update', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Sessions.
@@ -2756,7 +2808,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends SessionsDeleteManyArgs>(args?: SelectSubset<T, SessionsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2775,7 +2827,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends SessionsUpdateManyArgs>(args: SelectSubset<T, SessionsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2792,7 +2844,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Sessions and only return the `session_id`
      * const sessionsWithSession_idOnly = await prisma.sessions.updateManyAndReturn({
      *   select: { session_id: true },
@@ -2805,9 +2857,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends SessionsUpdateManyAndReturnArgs>(args: SelectSubset<T, SessionsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends SessionsUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, SessionsUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Create or update one Sessions.
@@ -2826,8 +2880,9 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends SessionsUpsertArgs>(args: SelectSubset<T, SessionsUpsertArgs<ExtArgs>>): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends SessionsUpsertArgs>(
+      args: SelectSubset<T, SessionsUpsertArgs<ExtArgs>>
+    ): Prisma__SessionsClient<$Result.GetResult<Prisma.$SessionsPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Count the number of Sessions.
@@ -2841,9 +2896,9 @@ export namespace Prisma {
      *     // ... the filter for the Sessions we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends SessionsCountArgs>(
-      args?: Subset<T, SessionsCountArgs>,
+      args?: Subset<T, SessionsCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -2875,7 +2930,7 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
+     **/
     aggregate<T extends SessionsAggregateArgs>(args: Subset<T, SessionsAggregateArgs>): Prisma.PrismaPromise<GetSessionsAggregateType<T>>
 
     /**
@@ -2894,17 +2949,12 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends SessionsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SessionsGroupByArgs['orderBy'] }
-        : { orderBy?: SessionsGroupByArgs['orderBy'] },
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake ? { orderBy: SessionsGroupByArgs['orderBy'] } : { orderBy?: SessionsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2912,52 +2962,43 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SessionsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Sessions model
-   */
-  readonly fields: SessionsFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+    >(
+      args: SubsetIntersection<T, SessionsGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetSessionsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the Sessions model
+     */
+    readonly fields: SessionsFieldRefs
   }
 
   /**
@@ -2966,16 +3007,31 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SessionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__SessionsClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {}
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -2991,18 +3047,14 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
-
-
-
   /**
    * Fields of the Sessions model
    */
   interface SessionsFieldRefs {
-    readonly session_id: FieldRef<"Sessions", 'Int'>
-    readonly expires: FieldRef<"Sessions", 'DateTime'>
-    readonly userId: FieldRef<"Sessions", 'String'>
+    readonly session_id: FieldRef<'Sessions', 'Int'>
+    readonly expires: FieldRef<'Sessions', 'DateTime'>
+    readonly userId: FieldRef<'Sessions', 'String'>
   }
-    
 
   // Custom InputTypes
   /**
@@ -3071,31 +3123,31 @@ export namespace Prisma {
     where?: SessionsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Sessions to fetch.
      */
     orderBy?: SessionsOrderByWithRelationInput | SessionsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Sessions.
      */
     cursor?: SessionsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Sessions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Sessions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Sessions.
      */
     distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
@@ -3123,31 +3175,31 @@ export namespace Prisma {
     where?: SessionsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Sessions to fetch.
      */
     orderBy?: SessionsOrderByWithRelationInput | SessionsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Sessions.
      */
     cursor?: SessionsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Sessions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Sessions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Sessions.
      */
     distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
@@ -3175,31 +3227,31 @@ export namespace Prisma {
     where?: SessionsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Sessions to fetch.
      */
     orderBy?: SessionsOrderByWithRelationInput | SessionsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Sessions.
      */
     cursor?: SessionsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Sessions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Sessions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Sessions.
      */
     distinct?: SessionsScalarFieldEnum | SessionsScalarFieldEnum[]
@@ -3419,7 +3471,6 @@ export namespace Prisma {
     include?: SessionsInclude<ExtArgs> | null
   }
 
-
   /**
    * Model Habits
    */
@@ -3462,7 +3513,6 @@ export namespace Prisma {
     _all: number
   }
 
-
   export type HabitsAvgAggregateInputType = {
     id?: true
   }
@@ -3500,70 +3550,67 @@ export namespace Prisma {
     where?: HabitsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habits to fetch.
      */
     orderBy?: HabitsOrderByWithRelationInput | HabitsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: HabitsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habits from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habits.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Habits
-    **/
+     **/
     _count?: true | HabitsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
+     **/
     _avg?: HabitsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
+     **/
     _sum?: HabitsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: HabitsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: HabitsMaxAggregateInputType
   }
 
   export type GetHabitsAggregateType<T extends HabitsAggregateArgs> = {
-        [P in keyof T & keyof AggregateHabits]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateHabits]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateHabits[P]>
       : GetScalarType<T[P], AggregateHabits[P]>
   }
-
-
-
 
   export type HabitsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HabitsWhereInput
@@ -3593,43 +3640,50 @@ export namespace Prisma {
 
   type GetHabitsGroupByPayload<T extends HabitsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<HabitsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof HabitsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], HabitsGroupByOutputType[P]>
+      PickEnumerable<HabitsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof HabitsGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], HabitsGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], HabitsGroupByOutputType[P]>
+      }
     >
+  >
 
+  export type HabitsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      name?: boolean
+      createdAt?: boolean
+      userId?: boolean
+      logs?: boolean | Habits$logsArgs<ExtArgs>
+      Author?: boolean | UserDefaultArgs<ExtArgs>
+      _count?: boolean | HabitsCountOutputTypeDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['habits']
+  >
 
-  export type HabitsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    createdAt?: boolean
-    userId?: boolean
-    logs?: boolean | Habits$logsArgs<ExtArgs>
-    Author?: boolean | UserDefaultArgs<ExtArgs>
-    _count?: boolean | HabitsCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["habits"]>
+  export type HabitsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      name?: boolean
+      createdAt?: boolean
+      userId?: boolean
+      Author?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['habits']
+  >
 
-  export type HabitsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    createdAt?: boolean
-    userId?: boolean
-    Author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["habits"]>
-
-  export type HabitsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    createdAt?: boolean
-    userId?: boolean
-    Author?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["habits"]>
+  export type HabitsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      name?: boolean
+      createdAt?: boolean
+      userId?: boolean
+      Author?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['habits']
+  >
 
   export type HabitsSelectScalar = {
     id?: boolean
@@ -3638,7 +3692,10 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type HabitsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "userId", ExtArgs["result"]["habits"]>
+  export type HabitsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    'id' | 'name' | 'createdAt' | 'userId',
+    ExtArgs['result']['habits']
+  >
   export type HabitsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     logs?: boolean | Habits$logsArgs<ExtArgs>
     Author?: boolean | UserDefaultArgs<ExtArgs>
@@ -3652,29 +3709,34 @@ export namespace Prisma {
   }
 
   export type $HabitsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Habits"
+    name: 'Habits'
     objects: {
       logs: Prisma.$Habit_logsPayload<ExtArgs>[]
       Author: Prisma.$UserPayload<ExtArgs>
     }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-      createdAt: Date
-      userId: string
-    }, ExtArgs["result"]["habits"]>
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number
+        name: string
+        createdAt: Date
+        userId: string
+      },
+      ExtArgs['result']['habits']
+    >
     composites: {}
   }
 
   type HabitsGetPayload<S extends boolean | null | undefined | HabitsDefaultArgs> = $Result.GetResult<Prisma.$HabitsPayload, S>
 
-  type HabitsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<HabitsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: HabitsCountAggregateInputType | true
-    }
+  type HabitsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    HabitsFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: HabitsCountAggregateInputType | true
+  }
 
   export interface HabitsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Habits'], meta: { name: 'Habits' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Habits']; meta: { name: 'Habits' } }
     /**
      * Find zero or one Habits that matches the filter.
      * @param {HabitsFindUniqueArgs} args - Arguments to find a Habits
@@ -3686,7 +3748,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends HabitsFindUniqueArgs>(args: SelectSubset<T, HabitsFindUniqueArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends HabitsFindUniqueArgs>(
+      args: SelectSubset<T, HabitsFindUniqueArgs<ExtArgs>>
+    ): Prisma__HabitsClient<
+      $Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find one Habits that matches the filter or throw an error with `error.code='P2025'`
@@ -3700,7 +3769,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends HabitsFindUniqueOrThrowArgs>(args: SelectSubset<T, HabitsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends HabitsFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, HabitsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__HabitsClient<
+      $Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Habits that matches the filter.
@@ -3715,7 +3791,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends HabitsFindFirstArgs>(args?: SelectSubset<T, HabitsFindFirstArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends HabitsFindFirstArgs>(
+      args?: SelectSubset<T, HabitsFindFirstArgs<ExtArgs>>
+    ): Prisma__HabitsClient<
+      $Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Habits that matches the filter or
@@ -3731,7 +3814,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends HabitsFindFirstOrThrowArgs>(args?: SelectSubset<T, HabitsFindFirstOrThrowArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends HabitsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, HabitsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__HabitsClient<
+      $Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find zero or more Habits that matches the filter.
@@ -3741,15 +3831,17 @@ export namespace Prisma {
      * @example
      * // Get all Habits
      * const habits = await prisma.habits.findMany()
-     * 
+     *
      * // Get first 10 Habits
      * const habits = await prisma.habits.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const habitsWithIdOnly = await prisma.habits.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends HabitsFindManyArgs>(args?: SelectSubset<T, HabitsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends HabitsFindManyArgs>(
+      args?: SelectSubset<T, HabitsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>>
 
     /**
      * Create a Habits.
@@ -3761,9 +3853,11 @@ export namespace Prisma {
      *     // ... data to create a Habits
      *   }
      * })
-     * 
+     *
      */
-    create<T extends HabitsCreateArgs>(args: SelectSubset<T, HabitsCreateArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends HabitsCreateArgs>(
+      args: SelectSubset<T, HabitsCreateArgs<ExtArgs>>
+    ): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'create', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Habits.
@@ -3775,7 +3869,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends HabitsCreateManyArgs>(args?: SelectSubset<T, HabitsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -3789,7 +3883,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Habits and only return the `id`
      * const habitsWithIdOnly = await prisma.habits.createManyAndReturn({
      *   select: { id: true },
@@ -3799,9 +3893,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends HabitsCreateManyAndReturnArgs>(args?: SelectSubset<T, HabitsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends HabitsCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, HabitsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Delete a Habits.
@@ -3813,9 +3909,11 @@ export namespace Prisma {
      *     // ... filter to delete one Habits
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends HabitsDeleteArgs>(args: SelectSubset<T, HabitsDeleteArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends HabitsDeleteArgs>(
+      args: SelectSubset<T, HabitsDeleteArgs<ExtArgs>>
+    ): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Habits.
@@ -3830,9 +3928,11 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends HabitsUpdateArgs>(args: SelectSubset<T, HabitsUpdateArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends HabitsUpdateArgs>(
+      args: SelectSubset<T, HabitsUpdateArgs<ExtArgs>>
+    ): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'update', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Habits.
@@ -3844,7 +3944,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends HabitsDeleteManyArgs>(args?: SelectSubset<T, HabitsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -3863,7 +3963,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends HabitsUpdateManyArgs>(args: SelectSubset<T, HabitsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -3880,7 +3980,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Habits and only return the `id`
      * const habitsWithIdOnly = await prisma.habits.updateManyAndReturn({
      *   select: { id: true },
@@ -3893,9 +3993,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends HabitsUpdateManyAndReturnArgs>(args: SelectSubset<T, HabitsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends HabitsUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, HabitsUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Create or update one Habits.
@@ -3914,8 +4016,9 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends HabitsUpsertArgs>(args: SelectSubset<T, HabitsUpsertArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends HabitsUpsertArgs>(
+      args: SelectSubset<T, HabitsUpsertArgs<ExtArgs>>
+    ): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Count the number of Habits.
@@ -3929,9 +4032,9 @@ export namespace Prisma {
      *     // ... the filter for the Habits we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends HabitsCountArgs>(
-      args?: Subset<T, HabitsCountArgs>,
+      args?: Subset<T, HabitsCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -3963,7 +4066,7 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
+     **/
     aggregate<T extends HabitsAggregateArgs>(args: Subset<T, HabitsAggregateArgs>): Prisma.PrismaPromise<GetHabitsAggregateType<T>>
 
     /**
@@ -3982,17 +4085,12 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends HabitsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: HabitsGroupByArgs['orderBy'] }
-        : { orderBy?: HabitsGroupByArgs['orderBy'] },
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake ? { orderBy: HabitsGroupByArgs['orderBy'] } : { orderBy?: HabitsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4000,52 +4098,43 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, HabitsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHabitsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Habits model
-   */
-  readonly fields: HabitsFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+    >(
+      args: SubsetIntersection<T, HabitsGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetHabitsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the Habits model
+     */
+    readonly fields: HabitsFieldRefs
   }
 
   /**
@@ -4054,17 +4143,34 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__HabitsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    logs<T extends Habits$logsArgs<ExtArgs> = {}>(args?: Subset<T, Habits$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__HabitsClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {}
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    logs<T extends Habits$logsArgs<ExtArgs> = {}>(
+      args?: Subset<T, Habits$logsArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null>
+    Author<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -4080,19 +4186,15 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
-
-
-
   /**
    * Fields of the Habits model
    */
   interface HabitsFieldRefs {
-    readonly id: FieldRef<"Habits", 'Int'>
-    readonly name: FieldRef<"Habits", 'String'>
-    readonly createdAt: FieldRef<"Habits", 'DateTime'>
-    readonly userId: FieldRef<"Habits", 'String'>
+    readonly id: FieldRef<'Habits', 'Int'>
+    readonly name: FieldRef<'Habits', 'String'>
+    readonly createdAt: FieldRef<'Habits', 'DateTime'>
+    readonly userId: FieldRef<'Habits', 'String'>
   }
-    
 
   // Custom InputTypes
   /**
@@ -4161,31 +4263,31 @@ export namespace Prisma {
     where?: HabitsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habits to fetch.
      */
     orderBy?: HabitsOrderByWithRelationInput | HabitsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Habits.
      */
     cursor?: HabitsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habits from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habits.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habits.
      */
     distinct?: HabitsScalarFieldEnum | HabitsScalarFieldEnum[]
@@ -4213,31 +4315,31 @@ export namespace Prisma {
     where?: HabitsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habits to fetch.
      */
     orderBy?: HabitsOrderByWithRelationInput | HabitsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Habits.
      */
     cursor?: HabitsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habits from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habits.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habits.
      */
     distinct?: HabitsScalarFieldEnum | HabitsScalarFieldEnum[]
@@ -4265,31 +4367,31 @@ export namespace Prisma {
     where?: HabitsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habits to fetch.
      */
     orderBy?: HabitsOrderByWithRelationInput | HabitsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Habits.
      */
     cursor?: HabitsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habits from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habits.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habits.
      */
     distinct?: HabitsScalarFieldEnum | HabitsScalarFieldEnum[]
@@ -4533,7 +4635,6 @@ export namespace Prisma {
     include?: HabitsInclude<ExtArgs> | null
   }
 
-
   /**
    * Model Habit_logs
    */
@@ -4578,7 +4679,6 @@ export namespace Prisma {
     _all: number
   }
 
-
   export type Habit_logsAvgAggregateInputType = {
     id?: true
     habitId?: true
@@ -4618,70 +4718,67 @@ export namespace Prisma {
     where?: Habit_logsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habit_logs to fetch.
      */
     orderBy?: Habit_logsOrderByWithRelationInput | Habit_logsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: Habit_logsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habit_logs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habit_logs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Habit_logs
-    **/
+     **/
     _count?: true | Habit_logsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
+     **/
     _avg?: Habit_logsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
+     **/
     _sum?: Habit_logsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: Habit_logsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: Habit_logsMaxAggregateInputType
   }
 
   export type GetHabit_logsAggregateType<T extends Habit_logsAggregateArgs> = {
-        [P in keyof T & keyof AggregateHabit_logs]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateHabit_logs]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateHabit_logs[P]>
       : GetScalarType<T[P], AggregateHabit_logs[P]>
   }
-
-
-
 
   export type Habit_logsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Habit_logsWhereInput
@@ -4711,44 +4808,51 @@ export namespace Prisma {
 
   type GetHabit_logsGroupByPayload<T extends Habit_logsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Habit_logsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Habit_logsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Habit_logsGroupByOutputType[P]>
+      PickEnumerable<Habit_logsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof Habit_logsGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], Habit_logsGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], Habit_logsGroupByOutputType[P]>
+      }
     >
+  >
 
+  export type Habit_logsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      log_date?: boolean
+      habitId?: boolean
+      userId?: boolean
+      Habit?: boolean | HabitsDefaultArgs<ExtArgs>
+      User?: boolean | Habit_logs$UserArgs<ExtArgs>
+    },
+    ExtArgs['result']['habit_logs']
+  >
 
-  export type Habit_logsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    log_date?: boolean
-    habitId?: boolean
-    userId?: boolean
-    Habit?: boolean | HabitsDefaultArgs<ExtArgs>
-    User?: boolean | Habit_logs$UserArgs<ExtArgs>
-  }, ExtArgs["result"]["habit_logs"]>
+  export type Habit_logsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      log_date?: boolean
+      habitId?: boolean
+      userId?: boolean
+      Habit?: boolean | HabitsDefaultArgs<ExtArgs>
+      User?: boolean | Habit_logs$UserArgs<ExtArgs>
+    },
+    ExtArgs['result']['habit_logs']
+  >
 
-  export type Habit_logsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    log_date?: boolean
-    habitId?: boolean
-    userId?: boolean
-    Habit?: boolean | HabitsDefaultArgs<ExtArgs>
-    User?: boolean | Habit_logs$UserArgs<ExtArgs>
-  }, ExtArgs["result"]["habit_logs"]>
-
-  export type Habit_logsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    log_date?: boolean
-    habitId?: boolean
-    userId?: boolean
-    Habit?: boolean | HabitsDefaultArgs<ExtArgs>
-    User?: boolean | Habit_logs$UserArgs<ExtArgs>
-  }, ExtArgs["result"]["habit_logs"]>
+  export type Habit_logsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<
+    {
+      id?: boolean
+      log_date?: boolean
+      habitId?: boolean
+      userId?: boolean
+      Habit?: boolean | HabitsDefaultArgs<ExtArgs>
+      User?: boolean | Habit_logs$UserArgs<ExtArgs>
+    },
+    ExtArgs['result']['habit_logs']
+  >
 
   export type Habit_logsSelectScalar = {
     id?: boolean
@@ -4757,7 +4861,10 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type Habit_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "log_date" | "habitId" | "userId", ExtArgs["result"]["habit_logs"]>
+  export type Habit_logsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<
+    'id' | 'log_date' | 'habitId' | 'userId',
+    ExtArgs['result']['habit_logs']
+  >
   export type Habit_logsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Habit?: boolean | HabitsDefaultArgs<ExtArgs>
     User?: boolean | Habit_logs$UserArgs<ExtArgs>
@@ -4772,29 +4879,34 @@ export namespace Prisma {
   }
 
   export type $Habit_logsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Habit_logs"
+    name: 'Habit_logs'
     objects: {
       Habit: Prisma.$HabitsPayload<ExtArgs>
       User: Prisma.$UserPayload<ExtArgs> | null
     }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      log_date: Date
-      habitId: number
-      userId: string | null
-    }, ExtArgs["result"]["habit_logs"]>
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: number
+        log_date: Date
+        habitId: number
+        userId: string | null
+      },
+      ExtArgs['result']['habit_logs']
+    >
     composites: {}
   }
 
   type Habit_logsGetPayload<S extends boolean | null | undefined | Habit_logsDefaultArgs> = $Result.GetResult<Prisma.$Habit_logsPayload, S>
 
-  type Habit_logsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<Habit_logsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Habit_logsCountAggregateInputType | true
-    }
+  type Habit_logsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    Habit_logsFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: Habit_logsCountAggregateInputType | true
+  }
 
   export interface Habit_logsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Habit_logs'], meta: { name: 'Habit_logs' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Habit_logs']; meta: { name: 'Habit_logs' } }
     /**
      * Find zero or one Habit_logs that matches the filter.
      * @param {Habit_logsFindUniqueArgs} args - Arguments to find a Habit_logs
@@ -4806,7 +4918,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends Habit_logsFindUniqueArgs>(args: SelectSubset<T, Habit_logsFindUniqueArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends Habit_logsFindUniqueArgs>(
+      args: SelectSubset<T, Habit_logsFindUniqueArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find one Habit_logs that matches the filter or throw an error with `error.code='P2025'`
@@ -4820,7 +4939,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends Habit_logsFindUniqueOrThrowArgs>(args: SelectSubset<T, Habit_logsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends Habit_logsFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, Habit_logsFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Habit_logs that matches the filter.
@@ -4835,7 +4961,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends Habit_logsFindFirstArgs>(args?: SelectSubset<T, Habit_logsFindFirstArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends Habit_logsFindFirstArgs>(
+      args?: SelectSubset<T, Habit_logsFindFirstArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find the first Habit_logs that matches the filter or
@@ -4851,7 +4984,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends Habit_logsFindFirstOrThrowArgs>(args?: SelectSubset<T, Habit_logsFindFirstOrThrowArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends Habit_logsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, Habit_logsFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Find zero or more Habit_logs that matches the filter.
@@ -4861,15 +5001,17 @@ export namespace Prisma {
      * @example
      * // Get all Habit_logs
      * const habit_logs = await prisma.habit_logs.findMany()
-     * 
+     *
      * // Get first 10 Habit_logs
      * const habit_logs = await prisma.habit_logs.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const habit_logsWithIdOnly = await prisma.habit_logs.findMany({ select: { id: true } })
-     * 
+     *
      */
-    findMany<T extends Habit_logsFindManyArgs>(args?: SelectSubset<T, Habit_logsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends Habit_logsFindManyArgs>(
+      args?: SelectSubset<T, Habit_logsFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>>
 
     /**
      * Create a Habit_logs.
@@ -4881,9 +5023,16 @@ export namespace Prisma {
      *     // ... data to create a Habit_logs
      *   }
      * })
-     * 
+     *
      */
-    create<T extends Habit_logsCreateArgs>(args: SelectSubset<T, Habit_logsCreateArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends Habit_logsCreateArgs>(
+      args: SelectSubset<T, Habit_logsCreateArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Create many Habit_logs.
@@ -4895,7 +5044,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends Habit_logsCreateManyArgs>(args?: SelectSubset<T, Habit_logsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4909,7 +5058,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Habit_logs and only return the `id`
      * const habit_logsWithIdOnly = await prisma.habit_logs.createManyAndReturn({
      *   select: { id: true },
@@ -4919,9 +5068,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    createManyAndReturn<T extends Habit_logsCreateManyAndReturnArgs>(args?: SelectSubset<T, Habit_logsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends Habit_logsCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, Habit_logsCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Delete a Habit_logs.
@@ -4933,9 +5084,16 @@ export namespace Prisma {
      *     // ... filter to delete one Habit_logs
      *   }
      * })
-     * 
+     *
      */
-    delete<T extends Habit_logsDeleteArgs>(args: SelectSubset<T, Habit_logsDeleteArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends Habit_logsDeleteArgs>(
+      args: SelectSubset<T, Habit_logsDeleteArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Update one Habit_logs.
@@ -4950,9 +5108,16 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
-    update<T extends Habit_logsUpdateArgs>(args: SelectSubset<T, Habit_logsUpdateArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends Habit_logsUpdateArgs>(
+      args: SelectSubset<T, Habit_logsUpdateArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Delete zero or more Habit_logs.
@@ -4964,7 +5129,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends Habit_logsDeleteManyArgs>(args?: SelectSubset<T, Habit_logsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4983,7 +5148,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends Habit_logsUpdateManyArgs>(args: SelectSubset<T, Habit_logsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5000,7 +5165,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Habit_logs and only return the `id`
      * const habit_logsWithIdOnly = await prisma.habit_logs.updateManyAndReturn({
      *   select: { id: true },
@@ -5013,9 +5178,11 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
-    updateManyAndReturn<T extends Habit_logsUpdateManyAndReturnArgs>(args: SelectSubset<T, Habit_logsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends Habit_logsUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, Habit_logsUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>>
 
     /**
      * Create or update one Habit_logs.
@@ -5034,8 +5201,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends Habit_logsUpsertArgs>(args: SelectSubset<T, Habit_logsUpsertArgs<ExtArgs>>): Prisma__Habit_logsClient<$Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
+    upsert<T extends Habit_logsUpsertArgs>(
+      args: SelectSubset<T, Habit_logsUpsertArgs<ExtArgs>>
+    ): Prisma__Habit_logsClient<
+      $Result.GetResult<Prisma.$Habit_logsPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
 
     /**
      * Count the number of Habit_logs.
@@ -5049,9 +5222,9 @@ export namespace Prisma {
      *     // ... the filter for the Habit_logs we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends Habit_logsCountArgs>(
-      args?: Subset<T, Habit_logsCountArgs>,
+      args?: Subset<T, Habit_logsCountArgs>
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -5083,7 +5256,7 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
+     **/
     aggregate<T extends Habit_logsAggregateArgs>(args: Subset<T, Habit_logsAggregateArgs>): Prisma.PrismaPromise<GetHabit_logsAggregateType<T>>
 
     /**
@@ -5102,14 +5275,11 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends Habit_logsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: Habit_logsGroupByArgs['orderBy'] }
         : { orderBy?: Habit_logsGroupByArgs['orderBy'] },
@@ -5120,52 +5290,43 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
                 ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, Habit_logsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHabit_logsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Habit_logs model
-   */
-  readonly fields: Habit_logsFieldRefs;
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+    >(
+      args: SubsetIntersection<T, Habit_logsGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetHabit_logsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the Habit_logs model
+     */
+    readonly fields: Habit_logsFieldRefs
   }
 
   /**
@@ -5174,17 +5335,39 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__Habit_logsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    Habit<T extends HabitsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HabitsDefaultArgs<ExtArgs>>): Prisma__HabitsClient<$Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    User<T extends Habit_logs$UserArgs<ExtArgs> = {}>(args?: Subset<T, Habit_logs$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  export interface Prisma__Habit_logsClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {}
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    Habit<T extends HabitsDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, HabitsDefaultArgs<ExtArgs>>
+    ): Prisma__HabitsClient<
+      $Result.GetResult<Prisma.$HabitsPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+    User<T extends Habit_logs$UserArgs<ExtArgs> = {}>(
+      args?: Subset<T, Habit_logs$UserArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
@@ -5200,19 +5383,15 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
-
-
-
   /**
    * Fields of the Habit_logs model
    */
   interface Habit_logsFieldRefs {
-    readonly id: FieldRef<"Habit_logs", 'Int'>
-    readonly log_date: FieldRef<"Habit_logs", 'DateTime'>
-    readonly habitId: FieldRef<"Habit_logs", 'Int'>
-    readonly userId: FieldRef<"Habit_logs", 'String'>
+    readonly id: FieldRef<'Habit_logs', 'Int'>
+    readonly log_date: FieldRef<'Habit_logs', 'DateTime'>
+    readonly habitId: FieldRef<'Habit_logs', 'Int'>
+    readonly userId: FieldRef<'Habit_logs', 'String'>
   }
-    
 
   // Custom InputTypes
   /**
@@ -5281,31 +5460,31 @@ export namespace Prisma {
     where?: Habit_logsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habit_logs to fetch.
      */
     orderBy?: Habit_logsOrderByWithRelationInput | Habit_logsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Habit_logs.
      */
     cursor?: Habit_logsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habit_logs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habit_logs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habit_logs.
      */
     distinct?: Habit_logsScalarFieldEnum | Habit_logsScalarFieldEnum[]
@@ -5333,31 +5512,31 @@ export namespace Prisma {
     where?: Habit_logsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habit_logs to fetch.
      */
     orderBy?: Habit_logsOrderByWithRelationInput | Habit_logsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Habit_logs.
      */
     cursor?: Habit_logsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habit_logs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habit_logs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habit_logs.
      */
     distinct?: Habit_logsScalarFieldEnum | Habit_logsScalarFieldEnum[]
@@ -5385,31 +5564,31 @@ export namespace Prisma {
     where?: Habit_logsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Habit_logs to fetch.
      */
     orderBy?: Habit_logsOrderByWithRelationInput | Habit_logsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Habit_logs.
      */
     cursor?: Habit_logsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Habit_logs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Habit_logs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Habit_logs.
      */
     distinct?: Habit_logsScalarFieldEnum | Habit_logsScalarFieldEnum[]
@@ -5648,158 +5827,133 @@ export namespace Prisma {
     include?: Habit_logsInclude<ExtArgs> | null
   }
 
-
   /**
    * Enums
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted',
-    ReadCommitted: 'ReadCommitted',
-    RepeatableRead: 'RepeatableRead',
+    ReadUncommitted: 'ReadUncommitted'
+    ReadCommitted: 'ReadCommitted'
+    RepeatableRead: 'RepeatableRead'
     Serializable: 'Serializable'
-  };
+  }
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
-
   export const UserScalarFieldEnum: {
-    id: 'id',
-    email: 'email',
-    name: 'name',
-    password: 'password',
+    id: 'id'
+    email: 'email'
+    name: 'name'
+    password: 'password'
     createdAt: 'createdAt'
-  };
+  }
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
-
   export const SessionsScalarFieldEnum: {
-    session_id: 'session_id',
-    expires: 'expires',
+    session_id: 'session_id'
+    expires: 'expires'
     userId: 'userId'
-  };
+  }
 
   export type SessionsScalarFieldEnum = (typeof SessionsScalarFieldEnum)[keyof typeof SessionsScalarFieldEnum]
 
-
   export const HabitsScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    createdAt: 'createdAt',
+    id: 'id'
+    name: 'name'
+    createdAt: 'createdAt'
     userId: 'userId'
-  };
+  }
 
   export type HabitsScalarFieldEnum = (typeof HabitsScalarFieldEnum)[keyof typeof HabitsScalarFieldEnum]
 
-
   export const Habit_logsScalarFieldEnum: {
-    id: 'id',
-    log_date: 'log_date',
-    habitId: 'habitId',
+    id: 'id'
+    log_date: 'log_date'
+    habitId: 'habitId'
     userId: 'userId'
-  };
+  }
 
   export type Habit_logsScalarFieldEnum = (typeof Habit_logsScalarFieldEnum)[keyof typeof Habit_logsScalarFieldEnum]
 
-
   export const SortOrder: {
-    asc: 'asc',
+    asc: 'asc'
     desc: 'desc'
-  };
+  }
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
-
   export const QueryMode: {
-    default: 'default',
+    default: 'default'
     insensitive: 'insensitive'
-  };
+  }
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
-
   export const NullsOrder: {
-    first: 'first',
+    first: 'first'
     last: 'last'
-  };
+  }
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
 
   /**
    * Field references
    */
 
-
   /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
 
   /**
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
 
   /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
 
   /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
 
   /**
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
 
   /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
 
   /**
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
+
   /**
    * Deep Input Types
    */
-
 
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
+    id?: StringFilter<'User'> | string
+    email?: StringFilter<'User'> | string
+    name?: StringFilter<'User'> | string
+    password?: StringFilter<'User'> | string
+    createdAt?: DateTimeFilter<'User'> | Date | string
     logs?: Habit_logsListRelationFilter
     habits?: HabitsListRelationFilter
     sessions?: SessionsListRelationFilter
@@ -5816,19 +5970,22 @@ export namespace Prisma {
     sessions?: SessionsOrderByRelationAggregateInput
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    logs?: Habit_logsListRelationFilter
-    habits?: HabitsListRelationFilter
-    sessions?: SessionsListRelationFilter
-  }, "id" | "email">
+  export type UserWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string
+      email?: string
+      AND?: UserWhereInput | UserWhereInput[]
+      OR?: UserWhereInput[]
+      NOT?: UserWhereInput | UserWhereInput[]
+      name?: StringFilter<'User'> | string
+      password?: StringFilter<'User'> | string
+      createdAt?: DateTimeFilter<'User'> | Date | string
+      logs?: Habit_logsListRelationFilter
+      habits?: HabitsListRelationFilter
+      sessions?: SessionsListRelationFilter
+    },
+    'id' | 'email'
+  >
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5845,20 +6002,20 @@ export namespace Prisma {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    name?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    id?: StringWithAggregatesFilter<'User'> | string
+    email?: StringWithAggregatesFilter<'User'> | string
+    name?: StringWithAggregatesFilter<'User'> | string
+    password?: StringWithAggregatesFilter<'User'> | string
+    createdAt?: DateTimeWithAggregatesFilter<'User'> | Date | string
   }
 
   export type SessionsWhereInput = {
     AND?: SessionsWhereInput | SessionsWhereInput[]
     OR?: SessionsWhereInput[]
     NOT?: SessionsWhereInput | SessionsWhereInput[]
-    session_id?: IntFilter<"Sessions"> | number
-    expires?: DateTimeFilter<"Sessions"> | Date | string
-    userId?: StringFilter<"Sessions"> | string
+    session_id?: IntFilter<'Sessions'> | number
+    expires?: DateTimeFilter<'Sessions'> | Date | string
+    userId?: StringFilter<'Sessions'> | string
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -5869,15 +6026,18 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
   }
 
-  export type SessionsWhereUniqueInput = Prisma.AtLeast<{
-    session_id?: number
-    AND?: SessionsWhereInput | SessionsWhereInput[]
-    OR?: SessionsWhereInput[]
-    NOT?: SessionsWhereInput | SessionsWhereInput[]
-    expires?: DateTimeFilter<"Sessions"> | Date | string
-    userId?: StringFilter<"Sessions"> | string
-    User?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "session_id">
+  export type SessionsWhereUniqueInput = Prisma.AtLeast<
+    {
+      session_id?: number
+      AND?: SessionsWhereInput | SessionsWhereInput[]
+      OR?: SessionsWhereInput[]
+      NOT?: SessionsWhereInput | SessionsWhereInput[]
+      expires?: DateTimeFilter<'Sessions'> | Date | string
+      userId?: StringFilter<'Sessions'> | string
+      User?: XOR<UserScalarRelationFilter, UserWhereInput>
+    },
+    'session_id'
+  >
 
   export type SessionsOrderByWithAggregationInput = {
     session_id?: SortOrder
@@ -5894,19 +6054,19 @@ export namespace Prisma {
     AND?: SessionsScalarWhereWithAggregatesInput | SessionsScalarWhereWithAggregatesInput[]
     OR?: SessionsScalarWhereWithAggregatesInput[]
     NOT?: SessionsScalarWhereWithAggregatesInput | SessionsScalarWhereWithAggregatesInput[]
-    session_id?: IntWithAggregatesFilter<"Sessions"> | number
-    expires?: DateTimeWithAggregatesFilter<"Sessions"> | Date | string
-    userId?: StringWithAggregatesFilter<"Sessions"> | string
+    session_id?: IntWithAggregatesFilter<'Sessions'> | number
+    expires?: DateTimeWithAggregatesFilter<'Sessions'> | Date | string
+    userId?: StringWithAggregatesFilter<'Sessions'> | string
   }
 
   export type HabitsWhereInput = {
     AND?: HabitsWhereInput | HabitsWhereInput[]
     OR?: HabitsWhereInput[]
     NOT?: HabitsWhereInput | HabitsWhereInput[]
-    id?: IntFilter<"Habits"> | number
-    name?: StringFilter<"Habits"> | string
-    createdAt?: DateTimeFilter<"Habits"> | Date | string
-    userId?: StringFilter<"Habits"> | string
+    id?: IntFilter<'Habits'> | number
+    name?: StringFilter<'Habits'> | string
+    createdAt?: DateTimeFilter<'Habits'> | Date | string
+    userId?: StringFilter<'Habits'> | string
     logs?: Habit_logsListRelationFilter
     Author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -5920,17 +6080,20 @@ export namespace Prisma {
     Author?: UserOrderByWithRelationInput
   }
 
-  export type HabitsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: HabitsWhereInput | HabitsWhereInput[]
-    OR?: HabitsWhereInput[]
-    NOT?: HabitsWhereInput | HabitsWhereInput[]
-    name?: StringFilter<"Habits"> | string
-    createdAt?: DateTimeFilter<"Habits"> | Date | string
-    userId?: StringFilter<"Habits"> | string
-    logs?: Habit_logsListRelationFilter
-    Author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  export type HabitsWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number
+      AND?: HabitsWhereInput | HabitsWhereInput[]
+      OR?: HabitsWhereInput[]
+      NOT?: HabitsWhereInput | HabitsWhereInput[]
+      name?: StringFilter<'Habits'> | string
+      createdAt?: DateTimeFilter<'Habits'> | Date | string
+      userId?: StringFilter<'Habits'> | string
+      logs?: Habit_logsListRelationFilter
+      Author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    },
+    'id'
+  >
 
   export type HabitsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5948,20 +6111,20 @@ export namespace Prisma {
     AND?: HabitsScalarWhereWithAggregatesInput | HabitsScalarWhereWithAggregatesInput[]
     OR?: HabitsScalarWhereWithAggregatesInput[]
     NOT?: HabitsScalarWhereWithAggregatesInput | HabitsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Habits"> | number
-    name?: StringWithAggregatesFilter<"Habits"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Habits"> | Date | string
-    userId?: StringWithAggregatesFilter<"Habits"> | string
+    id?: IntWithAggregatesFilter<'Habits'> | number
+    name?: StringWithAggregatesFilter<'Habits'> | string
+    createdAt?: DateTimeWithAggregatesFilter<'Habits'> | Date | string
+    userId?: StringWithAggregatesFilter<'Habits'> | string
   }
 
   export type Habit_logsWhereInput = {
     AND?: Habit_logsWhereInput | Habit_logsWhereInput[]
     OR?: Habit_logsWhereInput[]
     NOT?: Habit_logsWhereInput | Habit_logsWhereInput[]
-    id?: IntFilter<"Habit_logs"> | number
-    log_date?: DateTimeFilter<"Habit_logs"> | Date | string
-    habitId?: IntFilter<"Habit_logs"> | number
-    userId?: StringNullableFilter<"Habit_logs"> | string | null
+    id?: IntFilter<'Habit_logs'> | number
+    log_date?: DateTimeFilter<'Habit_logs'> | Date | string
+    habitId?: IntFilter<'Habit_logs'> | number
+    userId?: StringNullableFilter<'Habit_logs'> | string | null
     Habit?: XOR<HabitsScalarRelationFilter, HabitsWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
@@ -5975,17 +6138,20 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
   }
 
-  export type Habit_logsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: Habit_logsWhereInput | Habit_logsWhereInput[]
-    OR?: Habit_logsWhereInput[]
-    NOT?: Habit_logsWhereInput | Habit_logsWhereInput[]
-    log_date?: DateTimeFilter<"Habit_logs"> | Date | string
-    habitId?: IntFilter<"Habit_logs"> | number
-    userId?: StringNullableFilter<"Habit_logs"> | string | null
-    Habit?: XOR<HabitsScalarRelationFilter, HabitsWhereInput>
-    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  export type Habit_logsWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: number
+      AND?: Habit_logsWhereInput | Habit_logsWhereInput[]
+      OR?: Habit_logsWhereInput[]
+      NOT?: Habit_logsWhereInput | Habit_logsWhereInput[]
+      log_date?: DateTimeFilter<'Habit_logs'> | Date | string
+      habitId?: IntFilter<'Habit_logs'> | number
+      userId?: StringNullableFilter<'Habit_logs'> | string | null
+      Habit?: XOR<HabitsScalarRelationFilter, HabitsWhereInput>
+      User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    },
+    'id'
+  >
 
   export type Habit_logsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -6003,10 +6169,10 @@ export namespace Prisma {
     AND?: Habit_logsScalarWhereWithAggregatesInput | Habit_logsScalarWhereWithAggregatesInput[]
     OR?: Habit_logsScalarWhereWithAggregatesInput[]
     NOT?: Habit_logsScalarWhereWithAggregatesInput | Habit_logsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Habit_logs"> | number
-    log_date?: DateTimeWithAggregatesFilter<"Habit_logs"> | Date | string
-    habitId?: IntWithAggregatesFilter<"Habit_logs"> | number
-    userId?: StringNullableWithAggregatesFilter<"Habit_logs"> | string | null
+    id?: IntWithAggregatesFilter<'Habit_logs'> | number
+    log_date?: DateTimeWithAggregatesFilter<'Habit_logs'> | Date | string
+    habitId?: IntWithAggregatesFilter<'Habit_logs'> | number
+    userId?: StringNullableWithAggregatesFilter<'Habit_logs'> | string | null
   }
 
   export type UserCreateInput = {
@@ -6487,42 +6653,60 @@ export namespace Prisma {
   }
 
   export type Habit_logsCreateNestedManyWithoutUserInput = {
-    create?: XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput> | Habit_logsCreateWithoutUserInput[] | Habit_logsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput>
+      | Habit_logsCreateWithoutUserInput[]
+      | Habit_logsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutUserInput | Habit_logsCreateOrConnectWithoutUserInput[]
     createMany?: Habit_logsCreateManyUserInputEnvelope
     connect?: Habit_logsWhereUniqueInput | Habit_logsWhereUniqueInput[]
   }
 
   export type HabitsCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput> | HabitsCreateWithoutAuthorInput[] | HabitsUncheckedCreateWithoutAuthorInput[]
+    create?:
+      | XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput>
+      | HabitsCreateWithoutAuthorInput[]
+      | HabitsUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: HabitsCreateOrConnectWithoutAuthorInput | HabitsCreateOrConnectWithoutAuthorInput[]
     createMany?: HabitsCreateManyAuthorInputEnvelope
     connect?: HabitsWhereUniqueInput | HabitsWhereUniqueInput[]
   }
 
   export type SessionsCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput> | SessionsCreateWithoutUserInput[] | SessionsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput>
+      | SessionsCreateWithoutUserInput[]
+      | SessionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionsCreateOrConnectWithoutUserInput | SessionsCreateOrConnectWithoutUserInput[]
     createMany?: SessionsCreateManyUserInputEnvelope
     connect?: SessionsWhereUniqueInput | SessionsWhereUniqueInput[]
   }
 
   export type Habit_logsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput> | Habit_logsCreateWithoutUserInput[] | Habit_logsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput>
+      | Habit_logsCreateWithoutUserInput[]
+      | Habit_logsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutUserInput | Habit_logsCreateOrConnectWithoutUserInput[]
     createMany?: Habit_logsCreateManyUserInputEnvelope
     connect?: Habit_logsWhereUniqueInput | Habit_logsWhereUniqueInput[]
   }
 
   export type HabitsUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput> | HabitsCreateWithoutAuthorInput[] | HabitsUncheckedCreateWithoutAuthorInput[]
+    create?:
+      | XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput>
+      | HabitsCreateWithoutAuthorInput[]
+      | HabitsUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: HabitsCreateOrConnectWithoutAuthorInput | HabitsCreateOrConnectWithoutAuthorInput[]
     createMany?: HabitsCreateManyAuthorInputEnvelope
     connect?: HabitsWhereUniqueInput | HabitsWhereUniqueInput[]
   }
 
   export type SessionsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput> | SessionsCreateWithoutUserInput[] | SessionsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput>
+      | SessionsCreateWithoutUserInput[]
+      | SessionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionsCreateOrConnectWithoutUserInput | SessionsCreateOrConnectWithoutUserInput[]
     createMany?: SessionsCreateManyUserInputEnvelope
     connect?: SessionsWhereUniqueInput | SessionsWhereUniqueInput[]
@@ -6537,7 +6721,10 @@ export namespace Prisma {
   }
 
   export type Habit_logsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput> | Habit_logsCreateWithoutUserInput[] | Habit_logsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput>
+      | Habit_logsCreateWithoutUserInput[]
+      | Habit_logsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutUserInput | Habit_logsCreateOrConnectWithoutUserInput[]
     upsert?: Habit_logsUpsertWithWhereUniqueWithoutUserInput | Habit_logsUpsertWithWhereUniqueWithoutUserInput[]
     createMany?: Habit_logsCreateManyUserInputEnvelope
@@ -6551,7 +6738,10 @@ export namespace Prisma {
   }
 
   export type HabitsUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput> | HabitsCreateWithoutAuthorInput[] | HabitsUncheckedCreateWithoutAuthorInput[]
+    create?:
+      | XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput>
+      | HabitsCreateWithoutAuthorInput[]
+      | HabitsUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: HabitsCreateOrConnectWithoutAuthorInput | HabitsCreateOrConnectWithoutAuthorInput[]
     upsert?: HabitsUpsertWithWhereUniqueWithoutAuthorInput | HabitsUpsertWithWhereUniqueWithoutAuthorInput[]
     createMany?: HabitsCreateManyAuthorInputEnvelope
@@ -6565,7 +6755,10 @@ export namespace Prisma {
   }
 
   export type SessionsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput> | SessionsCreateWithoutUserInput[] | SessionsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput>
+      | SessionsCreateWithoutUserInput[]
+      | SessionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionsCreateOrConnectWithoutUserInput | SessionsCreateOrConnectWithoutUserInput[]
     upsert?: SessionsUpsertWithWhereUniqueWithoutUserInput | SessionsUpsertWithWhereUniqueWithoutUserInput[]
     createMany?: SessionsCreateManyUserInputEnvelope
@@ -6579,7 +6772,10 @@ export namespace Prisma {
   }
 
   export type Habit_logsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput> | Habit_logsCreateWithoutUserInput[] | Habit_logsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutUserInput, Habit_logsUncheckedCreateWithoutUserInput>
+      | Habit_logsCreateWithoutUserInput[]
+      | Habit_logsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutUserInput | Habit_logsCreateOrConnectWithoutUserInput[]
     upsert?: Habit_logsUpsertWithWhereUniqueWithoutUserInput | Habit_logsUpsertWithWhereUniqueWithoutUserInput[]
     createMany?: Habit_logsCreateManyUserInputEnvelope
@@ -6593,7 +6789,10 @@ export namespace Prisma {
   }
 
   export type HabitsUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput> | HabitsCreateWithoutAuthorInput[] | HabitsUncheckedCreateWithoutAuthorInput[]
+    create?:
+      | XOR<HabitsCreateWithoutAuthorInput, HabitsUncheckedCreateWithoutAuthorInput>
+      | HabitsCreateWithoutAuthorInput[]
+      | HabitsUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: HabitsCreateOrConnectWithoutAuthorInput | HabitsCreateOrConnectWithoutAuthorInput[]
     upsert?: HabitsUpsertWithWhereUniqueWithoutAuthorInput | HabitsUpsertWithWhereUniqueWithoutAuthorInput[]
     createMany?: HabitsCreateManyAuthorInputEnvelope
@@ -6607,7 +6806,10 @@ export namespace Prisma {
   }
 
   export type SessionsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput> | SessionsCreateWithoutUserInput[] | SessionsUncheckedCreateWithoutUserInput[]
+    create?:
+      | XOR<SessionsCreateWithoutUserInput, SessionsUncheckedCreateWithoutUserInput>
+      | SessionsCreateWithoutUserInput[]
+      | SessionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionsCreateOrConnectWithoutUserInput | SessionsCreateOrConnectWithoutUserInput[]
     upsert?: SessionsUpsertWithWhereUniqueWithoutUserInput | SessionsUpsertWithWhereUniqueWithoutUserInput[]
     createMany?: SessionsCreateManyUserInputEnvelope
@@ -6643,7 +6845,10 @@ export namespace Prisma {
   }
 
   export type Habit_logsCreateNestedManyWithoutHabitInput = {
-    create?: XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput> | Habit_logsCreateWithoutHabitInput[] | Habit_logsUncheckedCreateWithoutHabitInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput>
+      | Habit_logsCreateWithoutHabitInput[]
+      | Habit_logsUncheckedCreateWithoutHabitInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutHabitInput | Habit_logsCreateOrConnectWithoutHabitInput[]
     createMany?: Habit_logsCreateManyHabitInputEnvelope
     connect?: Habit_logsWhereUniqueInput | Habit_logsWhereUniqueInput[]
@@ -6656,14 +6861,20 @@ export namespace Prisma {
   }
 
   export type Habit_logsUncheckedCreateNestedManyWithoutHabitInput = {
-    create?: XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput> | Habit_logsCreateWithoutHabitInput[] | Habit_logsUncheckedCreateWithoutHabitInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput>
+      | Habit_logsCreateWithoutHabitInput[]
+      | Habit_logsUncheckedCreateWithoutHabitInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutHabitInput | Habit_logsCreateOrConnectWithoutHabitInput[]
     createMany?: Habit_logsCreateManyHabitInputEnvelope
     connect?: Habit_logsWhereUniqueInput | Habit_logsWhereUniqueInput[]
   }
 
   export type Habit_logsUpdateManyWithoutHabitNestedInput = {
-    create?: XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput> | Habit_logsCreateWithoutHabitInput[] | Habit_logsUncheckedCreateWithoutHabitInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput>
+      | Habit_logsCreateWithoutHabitInput[]
+      | Habit_logsUncheckedCreateWithoutHabitInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutHabitInput | Habit_logsCreateOrConnectWithoutHabitInput[]
     upsert?: Habit_logsUpsertWithWhereUniqueWithoutHabitInput | Habit_logsUpsertWithWhereUniqueWithoutHabitInput[]
     createMany?: Habit_logsCreateManyHabitInputEnvelope
@@ -6685,7 +6896,10 @@ export namespace Prisma {
   }
 
   export type Habit_logsUncheckedUpdateManyWithoutHabitNestedInput = {
-    create?: XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput> | Habit_logsCreateWithoutHabitInput[] | Habit_logsUncheckedCreateWithoutHabitInput[]
+    create?:
+      | XOR<Habit_logsCreateWithoutHabitInput, Habit_logsUncheckedCreateWithoutHabitInput>
+      | Habit_logsCreateWithoutHabitInput[]
+      | Habit_logsUncheckedCreateWithoutHabitInput[]
     connectOrCreate?: Habit_logsCreateOrConnectWithoutHabitInput | Habit_logsCreateOrConnectWithoutHabitInput[]
     upsert?: Habit_logsUpsertWithWhereUniqueWithoutHabitInput | Habit_logsUpsertWithWhereUniqueWithoutHabitInput[]
     createMany?: Habit_logsCreateManyHabitInputEnvelope
@@ -6951,10 +7165,10 @@ export namespace Prisma {
     AND?: Habit_logsScalarWhereInput | Habit_logsScalarWhereInput[]
     OR?: Habit_logsScalarWhereInput[]
     NOT?: Habit_logsScalarWhereInput | Habit_logsScalarWhereInput[]
-    id?: IntFilter<"Habit_logs"> | number
-    log_date?: DateTimeFilter<"Habit_logs"> | Date | string
-    habitId?: IntFilter<"Habit_logs"> | number
-    userId?: StringNullableFilter<"Habit_logs"> | string | null
+    id?: IntFilter<'Habit_logs'> | number
+    log_date?: DateTimeFilter<'Habit_logs'> | Date | string
+    habitId?: IntFilter<'Habit_logs'> | number
+    userId?: StringNullableFilter<'Habit_logs'> | string | null
   }
 
   export type HabitsUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -6977,10 +7191,10 @@ export namespace Prisma {
     AND?: HabitsScalarWhereInput | HabitsScalarWhereInput[]
     OR?: HabitsScalarWhereInput[]
     NOT?: HabitsScalarWhereInput | HabitsScalarWhereInput[]
-    id?: IntFilter<"Habits"> | number
-    name?: StringFilter<"Habits"> | string
-    createdAt?: DateTimeFilter<"Habits"> | Date | string
-    userId?: StringFilter<"Habits"> | string
+    id?: IntFilter<'Habits'> | number
+    name?: StringFilter<'Habits'> | string
+    createdAt?: DateTimeFilter<'Habits'> | Date | string
+    userId?: StringFilter<'Habits'> | string
   }
 
   export type SessionsUpsertWithWhereUniqueWithoutUserInput = {
@@ -7003,9 +7217,9 @@ export namespace Prisma {
     AND?: SessionsScalarWhereInput | SessionsScalarWhereInput[]
     OR?: SessionsScalarWhereInput[]
     NOT?: SessionsScalarWhereInput | SessionsScalarWhereInput[]
-    session_id?: IntFilter<"Sessions"> | number
-    expires?: DateTimeFilter<"Sessions"> | Date | string
-    userId?: StringFilter<"Sessions"> | string
+    session_id?: IntFilter<'Sessions'> | number
+    expires?: DateTimeFilter<'Sessions'> | Date | string
+    userId?: StringFilter<'Sessions'> | string
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -7344,8 +7558,6 @@ export namespace Prisma {
     log_date?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
-
-
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

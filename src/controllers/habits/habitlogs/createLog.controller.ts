@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express'
 import * as z from 'zod'
 
-import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '../../../db/index.js'
-
 import type { Habit_logs } from '../../../../types/schema'
+
+import { createLogForHabit, getHabitForUser, getLastLogForHabit } from '../../../db/index.js'
 
 const schema = z.object({
   id: z.coerce.number().min(1, 'ID is required')

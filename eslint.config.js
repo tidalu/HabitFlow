@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint'
 import vitest from '@vitest/eslint-plugin'
 
 export default tseslint.config(
-  { ignores: ['**/*.js'] },
+  { ignores: ['**/*.js', 'src/generated/**', 'node_modules/**', 'dist/**', 'prisma.config.ts', 'vitest.config.ts'] },
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
@@ -14,6 +14,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: true,
+        allowDefaultProject: ['prisma.config.ts'],
         tsconfigRootDir: import.meta.dirname
       }
     }

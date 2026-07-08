@@ -2,7 +2,6 @@ import nodemailer from 'nodemailer'
 
 import { userData } from '../../db/index.js'
 import { calculateStreak } from '../analytics.js'
-
 import { didLogToday, mailDataGen, makeHtmlBody1, makeHtmlBody2 } from './helpers.js'
 
 const smtpUser = process.env.SMTP_USER

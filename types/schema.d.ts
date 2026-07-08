@@ -1,27 +1,27 @@
-export type User = {
-  email: string
-  id: string
-  name: string
-  password: string
-}
-
-export type Habits = {
-  createdAt: Date
-  id: number
-  name: string
-  userId: string
-}
-
-export type Habit_logs = {
+export interface Habit_logs {
   habitId: number
   id: number
   log_date: Date
   userId: string
 }
 
-export type StreakData = {
+export interface Habits {
+  createdAt: Date
+  id: number
+  name: string
+  userId: string
+}
+
+export interface StreakData {
   completionRate: number
   currentStreak: number
   longestStreak: number
   totalCompletions: number
+}
+
+export interface User {
+  email: string
+  id: string
+  name: string
+  password: string
 }
