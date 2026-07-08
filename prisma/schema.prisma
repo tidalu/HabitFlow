@@ -28,6 +28,7 @@ model Sessions {
 model Habits {
   id        Int          @id @default(autoincrement())
   name      String
+  description String?
   createdAt DateTime     @default(now())
   userId    String
   logs      Habit_logs[]
