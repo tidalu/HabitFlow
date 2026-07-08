@@ -9,7 +9,8 @@ if (!url) {
 
 export default defineConfig({
   datasource: {
-    url
+    url,
+    shadowDatabaseUrl: process.env.SHADOW_DATABASE_URL
   },
   migrations: {
     path: 'prisma/migrations'
