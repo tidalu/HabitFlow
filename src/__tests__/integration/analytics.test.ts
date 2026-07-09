@@ -48,6 +48,7 @@ describe('GET /analytics/:id', () => {
   it('returns correct analytics for a habit with logs', async () => {
     mockGetHabitForUser.mockResolvedValue({
       createdAt: new Date('2026-05-09T00:00:00.000Z'),
+      description: 'Habit description 2',
       id: 2,
       name: 'Read',
       userId: 'u1'
@@ -76,6 +77,7 @@ describe('GET /analytics/:id', () => {
   it('returns 404 when the habit has no logs', async () => {
     mockGetHabitForUser.mockResolvedValue({
       createdAt: new Date('2026-05-10T00:00:00.000Z'),
+      description: 'Habit description 2',
       id: 2,
       name: 'Read',
       userId: 'u1'

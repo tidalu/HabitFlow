@@ -26,12 +26,13 @@ model Sessions {
 }
 
 model Habits {
-  id        Int          @id @default(autoincrement())
-  name      String
-  createdAt DateTime     @default(now())
-  userId    String
-  logs      Habit_logs[]
-  Author    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String       @default("Habit description")
+  createdAt   DateTime     @default(now())
+  userId      String
+  logs        Habit_logs[]
+  Author      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Habit_logs {
